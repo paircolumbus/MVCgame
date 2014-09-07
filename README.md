@@ -6,7 +6,7 @@ This is an intermediate level challenge for engineers familiar with...
 - Object Oriented Programming
 
 #Instructions
-[Imgur](http://i.imgur.com/pRM7B8I.jpg)
+![Imgur](http://i.imgur.com/pRM7B8I.jpg)
 
 Create a command line script that mimics a game/application of your choice using the MVC pattern.
 
