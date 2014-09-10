@@ -15,4 +15,13 @@ Create a command line script that mimics a game/application of your choice using
 - It should use the MVC pattern. Consider prints & puts as a part of your view.
 - Ideas to explore: Deaf Grandma, Customized 99 Bottles of Beer, Todos App, Choose Your Own Adventure
 
+#Submission Instructions - _[better instructions](https://github.com/columbustutoringgroup/Welcome/blob/master/SubmittingChallenges.md)_
+- Write your game/app
+- Pull down this repo and create your feature branch
+- Create a separate dir in the repo `mkdir JaysGame`
+- Move your code to this new dir
+- Add & commit as needed
+- Push your branch
+- Submit a pull request
+
 Enjoy!
