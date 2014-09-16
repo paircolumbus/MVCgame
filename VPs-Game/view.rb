@@ -3,22 +3,16 @@ module GameView
  module Print
 
    class << self
-     def run_spinner
-       print "Loading (please wait) "
-       5.times { print "."; sleep 1; }
-       print "\n"
-     end
-
      def error_message
         puts "That's not a command key. Try again!"
      end
-       
+
      def title_screen
 title = <<TITLE
 
-     ********** || **********
-     *      TODO MAGIC      *
-     ********** || **********
+     ************************
+     *        WHO SAY       *
+     ************************
 
 TITLE
        puts title
@@ -28,56 +22,100 @@ TITLE
 menu = <<EOS
 
        ***** Welcome *****
-       - (V)iew your todos
-       - (A)dd a todo
-       - (C)omplete a todo
-       - (D)elete a todo
+       - (N)ew game
+       - (R)ules
        - (Q)uit program
-       *****         *****
+       *******************
 
 EOS
         puts menu
       end
 
-      #does print_list know too much about the underlying object???
+      def rules
+rules = <<EOS
 
-      def print_list(todos)
-        todos.each do |todo|
-          if todo.completed?
-            puts "[X] #{todo.id} || #{todo.title} - #{todo.description}" 
-          else
-            puts "[_] #{todo.id} || #{todo.title} - #{todo.description}" 
-          end
-        end
+       ***** Rules ************************
+       * Guess the word that is being said
+       ************************************
+
+EOS
+        puts rules
       end
 
-      def serialize_todo
-        {}.tap do |obj| 
-          ["\nEnter the title:", "\nEnter the description:"].each do |t| 
-            if obj.empty?
-              obj[:title] = fetch_user_input(t)
-            else
-              obj[:description] = fetch_user_input(t)
-            end
-          end
-        end
+WHAT = <<EOS
+
+       **********************
+       *
+       *
+       *
+       *
+       *    X
+       *
+       *
+       *
+       *
+       * WHAT DID I JUST SAY?
+       *
+       *
+       *
+       *
+       *
+       *
+       *
+       *
+       *
+       *
+       *
+       **********************
+
+EOS
+      def what
+        puts WHAT.sub("X", "")
       end
 
-      def deleted_id
-        gimme_id = "\nEnter the id of todo item you want to DELETE:"
-        fetch_user_input(gimme_id)
+      def what_try_again
+        puts WHAT.sub("X", "OK, TRY AGAIN")
       end
 
-      def completed_id
-        gimme_id = "\nEnter the id of todo item you want to mark as COMPLETED:"
-        fetch_user_input(gimme_id)
+      def another(word)
+another = <<EOS
+
+       **********************
+       *
+       *
+       *
+       *
+       *
+       *
+       *
+       *
+       * IT WAS BABABABA
+       * OK, HERE IS ANOTHER
+       *
+       *
+       *
+       *
+       *
+       *
+       *
+       *
+       *
+       *
+       *
+       **********************
+
+EOS
+        puts another.sub("BABABABA", word)
       end
 
       def fetch_user_input(question=nil)
         puts question if question
         print "> "
-        gets.chomp
+        gets.chomp.upcase
       end
+
     end
+
   end
+
 end

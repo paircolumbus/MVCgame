@@ -1,57 +1,35 @@
-require 'faker'
 require 'pry'
 
-class Todo
-  attr_reader :id, :title, :description, :completed
-
-  def initialize args 
-    @id = args[:id] 
-    @title = args[:title]
-    @description = args[:description]
-    @completed = false
-  end
-
-  def mark_completed
-    @completed = true
-  end
-
-  def completed?
-    @completed
-  end
-end
-
-class List
-  attr_reader :todos
+class SayIt
+  attr_accessor :things, :first_try
 
   def initialize
-    @primary_id = 0
-    @todos = []
-    populate_dummy_todos
+    @things = IO.readlines 'en'
+    @people = %w( Agnes Bruce Vicki Victoria )
+    @first_try = true
   end
 
-  def add_todo(input)
-    @todos << Todo.new(input.merge(fetch_id))
+
+
+  def say(word)
+    `say -v #{@people.shuffle.first} #{word}`
+    #puts word
   end
 
-  def complete_todo(id)
-    completed_item = @todos.select { |todo| todo.id == id }
-    fail "No item matching that id" unless completed_item
-    completed_item[0].mark_completed
-  end
-
-  def delete_todo(id)
-    @todos.delete_if { |n| n.id == id }
-  end
-
-  def populate_dummy_todos
-    5.times do
-      add_todo(title: Faker::Lorem.word, description: Faker::Lorem.sentence) 
+  def says(word)
+    threads = []
+    @people.each do |person|
+      threads << Thread.new do
+        `say -v #{person} #{word}`
+      end
     end
+    threads.each {|t| t.join}
+    #puts word
+    sleep 1
   end
 
-  private
-
-  def fetch_id
-    {id: @primary_id += 1 }
+  def random_word
+    @things[rand(@things.size)].chomp
   end
+
 end
