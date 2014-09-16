@@ -11,7 +11,7 @@ module GameView
 title = <<TITLE
 
      ************************
-     *        WHO SAY       *
+     *       WHAT SAY       *
      ************************
 
 TITLE
