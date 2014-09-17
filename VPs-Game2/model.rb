@@ -18,7 +18,7 @@ class Model
   end
 
   def move(dir)
-    @board[@xpos][@ypos] = 'X'.red
+    @board[@ypos][@xpos] = 'X'.red
     case dir
     when :up
       @ypos = ( @ypos + 1 == @ymax ? @ypos : @ypos + 1 )

@@ -15,9 +15,10 @@ BLOCK
 
   class << self
 
-    def initial
+    def initial(board)
       msg = "MOVE WITH WASD"
       puts INITIAL.sub(/F.*/, msg)
+      print_board(board, 0)
     end
 
 
@@ -27,12 +28,17 @@ BLOCK
       puts "moved #{dir}"
     end
 
-    def print_board(board)
+    def print_board(board, lines = 10)
+      cls(lines)
       x = board.size
       y = board.first.size
       x.times do |x|
         puts board[board.size - x - 1].join("")
       end
+    end
+
+    def cls(lines = 10)
+      puts "\n" * lines
     end
 
 

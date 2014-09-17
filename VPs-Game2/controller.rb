@@ -11,8 +11,8 @@ module Controller
 
 
     def run!
-      View::initial
       model = Model.new
+      View::initial(model.board)
 
       loop do
 
