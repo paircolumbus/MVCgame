@@ -4,7 +4,6 @@ require_relative 'model'
 require_relative 'view'
 
 module Controller
-  include Model
   class << self
 
 
@@ -13,6 +12,7 @@ module Controller
 
     def run!
       View::initial
+      model = Model.new
 
       loop do
 
@@ -21,14 +21,14 @@ module Controller
         input = STDIN.getc
         system("stty -raw echo")
         case input.upcase
-        when "W"
-          Model::move(:up)
-        when "S"
-          Model::move(:down)
-        when "A"
-          Model::move(:left)
-        when "D"
-          Model::move(:right)
+        when /W|,/
+          model.move(:up)
+        when /S|O/
+          model.move(:down)
+        when /A|A/
+          model.move(:left)
+        when /D|E/
+          model.move(:right)
         when "6"
           exit
         end
