@@ -35,7 +35,7 @@ class Model
       map_square{|s|
         if s[:cursor]
           if s[:shale]
-            s[:shale]
+            s[:shale].yellow
           else
             s[:cursor]
           end
@@ -88,7 +88,7 @@ class Model
   def intersperse_word(word)
     word.each_char do |c|
       x,y = get_a_random_empty_square
-      @board[x][y][:shale] = c.upcase.yellow
+      @board[x][y][:shale] = c.upcase
     end
   end
 
@@ -108,7 +108,9 @@ class Model
     end
     @board[@ypos][@xpos][:cursor] = :right
     if !@board[@ypos][@xpos][:shale].nil?
-      View::sayit(@board[@ypos][@xpos][:shale])
+      Thread.new do
+        View::sayit(@board[@ypos][@xpos][:shale])
+      end
     end
 
     View::moved(@surface.(), @ypos, @xpos, dir)
