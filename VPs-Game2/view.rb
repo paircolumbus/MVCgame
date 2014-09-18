@@ -18,12 +18,13 @@ BLOCK
     def initial(board)
       msg = "MOVE WITH WASD"
       puts INITIAL.sub(/F.*/, msg)
+      interpret_board(board)
       print_board(board, 0)
     end
 
 
     def moved(board, xpos, ypos, dir)
-      board[xpos][ypos] = 'O'.green
+      interpret_board(board)
       print_board(board)
       puts "moved #{dir}"
     end
@@ -37,12 +38,27 @@ BLOCK
       end
     end
 
+    def interpret_board(board)
+      x = board.size
+      y = board.first.size
+      x.times do |x|
+        y.times do |y|
+          if board[x][y] == :right
+            board[x][y] = 'O'.green
+          end
+        end
+      end
+    end
+
     def cls(lines = 10)
       puts "\n" * lines
     end
 
 
 
+    def sayit(it)
+      `say #{it}`
+    end
 
 
 

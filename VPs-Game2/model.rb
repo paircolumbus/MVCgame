@@ -16,19 +16,36 @@ class Model
 
     @board = @xmax.times.map do |i|
       @ymax.times.map do |j|
-        {text: 'X'.red,
-         shale: nil}
+        {
+          text: 'X'.red,
+          shale: nil,
+          cursor: nil,
+        }
       end
     end
 
     @xpos = 0
     @ypos = 0
+    @board[@xpos][@ypos][:cursor] = :right
 
     @word = "hidesay"
     @is_empty = ->(x,y){@board[x][y][:shale].nil?}
 
-    @surface = -> (){map_square{|s| s[:text]}}
-    @wordloc = intersperse_word(@word)
+    @surface = -> (){
+      map_square{|s|
+        if s[:cursor]
+          if s[:shale]
+            s[:shale]
+          else
+            s[:cursor]
+          end
+        else
+          s[:text]
+        end
+      }
+    }
+
+    intersperse_word(@word)
   end
 
 
@@ -78,7 +95,7 @@ class Model
 
   def move(dir)
 
-    @board[@ypos][@xpos][:text] = 'X'.red
+    @board[@ypos][@xpos][:cursor] = nil
     case dir
     when :up
       @ypos = ( @ypos + 1 == @ymax ? @ypos : @ypos + 1 )
@@ -88,6 +105,10 @@ class Model
       @xpos = ( @xpos - 1 < 0 ? @xpos : @xpos - 1 )
     when :right
       @xpos = ( @xpos + 1 == @xmax ? @xpos : @xpos + 1 )
+    end
+    @board[@ypos][@xpos][:cursor] = :right
+    if !@board[@ypos][@xpos][:shale].nil?
+      View::sayit(@board[@ypos][@xpos][:shale])
     end
 
     View::moved(@surface.(), @ypos, @xpos, dir)
