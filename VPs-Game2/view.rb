@@ -16,8 +16,9 @@ BLOCK
   class << self
 
     def initial(board)
-      msg = "MOVE WITH WASD"
-      puts INITIAL.sub(/F.*/, msg)
+      msg = "MOVE WITH WASD".green
+      msg2 = "MAKE A WORD BY MOVING AROUND".green
+      puts INITIAL.sub(/F.*/, msg).sub(/^I.*/, msg2)
       interpret_board(board)
       print_board(board, 0)
     end
@@ -26,7 +27,11 @@ BLOCK
     def moved(board, xpos, ypos, dir)
       interpret_board(board)
       print_board(board)
-      puts "moved #{dir}"
+      #puts "moved #{dir}"
+    end
+
+    def print_win_condition(board)
+      print_board(board)
     end
 
     def print_board(board, lines = 10)
@@ -60,6 +65,13 @@ BLOCK
       `say #{it}`
     end
 
+    def saysit(it)
+      %w(Bruce Agnes Victoria).each do |voice|
+        Thread.new do
+          `say -v #{voice} #{it}`
+        end
+      end
+    end
 
 
   end
