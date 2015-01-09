@@ -4,7 +4,7 @@ require_relative 'game_settings'
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = 'Usage: cli.rb [options]'
+  opts.banner = 'Usage: ruby cli.rb [options]'
 
   opts.on('-m', '--max MAX', 'set the maximum number to guess from') do |v|
     options[:max] = v.to_i
