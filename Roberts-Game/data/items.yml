@@ -1,0 +1,126 @@
+
+rusty_gate_key:
+  description: It's a key for the front gate. How convenient! It won't always be this easy. Welcome to Hellhouse ;)
+  takeable: true
+
+rusty_gate:
+  description: It looks old.
+  is_door: true
+  locked: true
+  unlocks_with: rusty_gate_key
+
+unkempt_bush:
+  description: It hasn't been trimmed in decades.
+  contains:
+    - front_door_key
+
+front_door_key:
+  description: It has a label that says "front door."
+  takeable: true
+
+front_door:
+  description: It's large and sturdy looking. It's actually kind of ominous.
+  is_door: true
+  locked: true
+  unlocks_with: front_door_key
+
+apple:
+  description: It's bright red apple. You wonder how it hasn't decayed.
+  determiner: an
+  takeable: true
+  is_food: true
+  hp_bonus: 3
+
+orange:
+  description: It's big, round, and orange. You wonder how it hasn't decayed.
+  determiner: an
+  takeable: true
+  is_food: true
+  hp_bonus: 3
+
+pizza:
+  description: It smells delicious! It's still good. The pepperoni must have been cured well.
+  takeable: true
+  is_food: true
+  hp_bonus: 10
+
+turkey:
+  description: It looks perfectly moist, as if it has just been cooked. The smell recalls memories of better days; the days before the accident.
+  takeable: true
+  is_food: true
+  hp_bonus: 10
+
+knife:
+  description: It's very sharp. Someone could really get hurt if they aren't careful.
+  takeable: true
+  is_weapon: true
+  weapon_damage: 2
+
+drawer:
+  description: It slides out easily.
+  contains:
+    - knife
+
+oven:
+  description: It's old, but big enough to cook a large amount of food. The original owners must have liked to entertain.
+  contains:
+    - pizza
+    - turkey
+
+countertop:
+  description: It's covered in dust.
+  contains:
+    - apple
+    - orange
+    - oven
+    - drawer
+
+red_book:
+  description: The text is in a language you don't recognize. The binding is of a very high quality red leather.
+  takeable: true
+  text: Locked doors need keys. Keys unlock doors. This knowledge is key.
+
+blue_book:
+  description: It's a book about banishing evil spirits.
+  takeable: true
+  is_weapon: true
+  weapon_damage: 1
+  text: Evil is bad. Good is good. This knowledge is the greatest weapon against a wraith.
+
+oak_bookshelf:
+  description: It's full of books with red covers.
+  is_door: true
+  unlocks_with: red_book
+
+walnut_bookshelf:
+  description: It's full of books with blue covers.
+  contains:
+    - blue_book
+
+# maple_bookshelf:
+#   description: It's full of books with green covers.
+
+first_hint:
+  description: Read this if you are stuck.
+  determiner: the
+  text: Look at the rusty gate key.
+  takeable: true
+  easy_to_read: true
+
+second_hint:
+  description: Read this if you are stuck.
+  determiner: the
+  text: There is a secret passage to the dungeon somewhere.
+  takeable: true
+
+third_hint:
+  description: Read this if you are stuck.
+  determiner: the
+  text: You can't rely on your sense of direction down here.
+  takeable: true
+  
+licorice:
+  description: It's kind of stale, but oh well.
+  takeable: true
+  is_food: true
+  hp_bonus: 8

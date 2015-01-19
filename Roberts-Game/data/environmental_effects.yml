@@ -1,0 +1,57 @@
+
+storm:
+  ambient_description: A storm has been raging for hours. You need shelter.
+  damage_description: The storm takes it's toll on your health.
+  damage:
+    - 0
+    - 0
+    - 0
+    - 1
+
+dark:
+  ambient_description: It's dark.
+  damage_description: You tripped over something in the dark.
+  damage:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+
+smart:
+  ambient_description: You feel smarter for some reason.
+  damage_description: All this thinking makes your head hurt.
+  damage:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+
+cold:
+  ambient_description: It's cold down here.
+  damage_description: You shiver through a cold gust.
+  damage:
+    - 0
+    - 0
+    - 1
+
+scary:
+  ambient_description: It's pretty scary in here.
+  damage_description: Your fear overtakes you.
+  damage:
+    - 0
+    - 1
+    - 2
+
+very_scary:
+  ambient_description: You are frightened.
+  damage_description: Your fear overtakes you.
+  damage:
+    - 1
+    - 2
+    - 3
