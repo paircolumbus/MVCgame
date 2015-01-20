@@ -75,6 +75,10 @@ class Command
       entity = Assets::get_entity words[1..-1].join('_').to_sym
       return DontSeeCommand.new words[1..-1].join(' ') if entity.nil?
       return AttackCommand.new entity
+    when :make
+    	return MakePlayerGodlyCommand.new(true) if words[1] == :me && words[2] == :godly
+    	return MakePlayerGodlyCommand.new(false) if words[1] == :me && words[2] == :normal
+    	return UnknownCommand.new
     end
 
     return UnknownCommand.new
@@ -261,4 +265,14 @@ class ReadCommand
     result << " (You are not clever enough to decipher this message.)"
     return result
   end
+end
+
+class MakePlayerGodlyCommand
+	def initialize value
+		@value = value
+	end
+	
+	def run player
+		player.godly = @value
+	end
 end

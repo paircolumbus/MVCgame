@@ -75,7 +75,8 @@ module GameView
         end
 
         puts "#{health_meter} #{human_message}"
-      end
+        puts "YOU ARE GODLY." if player.godly?
+			end
 
       def show_player_location player
         puts player.location.long_description
