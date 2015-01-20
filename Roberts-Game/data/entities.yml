@@ -22,7 +22,8 @@ wraith:
 
 hell_hound:
   description: It's a large black dog with a slobbering maw full of razor sharp teeth and glowing red eyes.
-  health: 10
+  health: 50
+  weakness: towel_rod
   damage:
     - 0
     - 2

@@ -157,3 +157,9 @@ egg_sandwich:
   is_food: true
   takeable: true
   hp_bonus: 7
+
+towel_rod:
+  description: It's made of iron.
+  is_weapon: true
+  weapon_damage: 3
+  takeable: true

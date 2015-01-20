@@ -6,10 +6,10 @@ require_relative "../models/Item"
 require_relative "../models/Location"
 require_relative "../models/Entity"
 
-require_relative "EnvironmentalEffectProxy"
-require_relative "ItemProxy"
-require_relative "LocationProxy"
-require_relative "EntityProxy"
+require_relative "proxy/EnvironmentalEffectProxy"
+require_relative "proxy/ItemProxy"
+require_relative "proxy/LocationProxy"
+require_relative "proxy/EntityProxy"
 
 module Assets
   @instanced = nil

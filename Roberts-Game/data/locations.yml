@@ -113,6 +113,8 @@ bathroom:
   environmental_effect: dark
   paths:
     north: upper_hall
+  items:
+    east: towel_rod
 
 observatory:
   short_description: an observatory
@@ -223,6 +225,8 @@ lava_room:
   paths:
     north: moist_room
     east: chapel
+  entities:
+    - hell_hound
 
 chapel:
   short_description: a chapel
