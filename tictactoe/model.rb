@@ -1,17 +1,15 @@
 require_relative 'globals'
 
 module GameModel
-
   module Model
-
     class << self
       attr_reader :board
       attr_accessor :winner, :winning_position
       @initilized = false
 
-      def initialize()
+      def initialize
         @players = [nil, nil]
-        @board = Board.new()
+        @board = Board.new
         @initilized = true
         @winner = nil
       end
@@ -19,9 +17,9 @@ module GameModel
       def set_player(name, p)
         @players[p] = Player.new(name, p == 0 ? X.new(self) : O.new(self))
       end
-      
+
       def get_player(i)
-        @players[i] ? @players[i] : "not set"
+        @players[i] ? @players[i] : 'not set'
       end
 
       def getBoardAsArray
@@ -29,9 +27,9 @@ module GameModel
         @board.size.times do |r|
           row = "[#{r}] |"
           @board.size.times do |c|
-            row += "\e[4m  " + (@board.data[r][c] ? @board.data[r][c].to_s : " ") + "  \e[0m|"
+            row += "\e[4m  " + (@board.data[r][c] ? @board.data[r][c].to_s : ' ') + "  \e[0m|"
           end
-          row += "   "
+          row += '   '
           string.push(row)
         end
         puts string
@@ -42,10 +40,9 @@ module GameModel
         @board.data[r][c] = piece
       end
 
-      def get_space(r,c)
+      def get_space(r, c)
         @board.data[r][c]
       end
-
     end
   end
 
@@ -57,7 +54,7 @@ module GameModel
     end
 
     def to_s
-      @name + "(" + @piece.to_s + ")"
+      @name + '(' + @piece.to_s + ')'
     end
   end
 
@@ -70,19 +67,19 @@ module GameModel
 
   class X < Piece
     def to_s
-      "X"
+      'X'
     end
   end
 
   class O < Piece
     def to_s
-      "O"
+      'O'
     end
   end
 
   class Board
     attr_accessor :data, :size
-    def initialize(size=3)
+    def initialize(size = 3)
       @size = size
       # @data = [[X.new(P1.new("Mike")),nil,nil],[X.new(P1.new("Mike")),X.new(P1.new("Mike")),nil],[X.new(P1.new("Mike")),nil,X.new(P1.new("Mike"))]]#Array.new(size) { Array.new(size) { nil }}#X.new(P2.new("Mike")) } }
       @data = Array.new(size) { Array.new(size) { nil } }
