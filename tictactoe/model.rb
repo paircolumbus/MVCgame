@@ -5,30 +5,23 @@ module GameModel
   module Model
 
     class << self
-
+      attr_reader :board
+      attr_accessor :winner, :winning_position
       @initilized = false
 
       def initialize()
-        @p1 = nil
-        @p2 = nil
+        @players = [nil, nil]
         @board = Board.new()
         @initilized = true
+        @winner = nil
       end
 
-      def setp1(name)
-
+      def set_player(name, p)
+        @players[p] = Player.new(name, p == 0 ? X.new(self) : O.new(self))
       end
-
-      def setp2(name)
-
-      end
-
-      def getp1()
-
-      end
-
-      def getp2()
-
+      
+      def get_player(i)
+        @players[i] ? @players[i] : "not set"
       end
 
       def getBoardAsArray
@@ -41,22 +34,31 @@ module GameModel
           row += "   "
           string.push(row)
         end
+        puts string
         string
+      end
+
+      def place_piece(piece, r, c)
+        @board.data[r][c] = piece
+      end
+
+      def get_space(r,c)
+        @board.data[r][c]
       end
 
     end
   end
 
   class Player
+    attr_reader :piece
+    def initialize(name, piece)
+      @name = name
+      @piece = piece
+    end
 
-  end
-
-  class P1 < Player
-
-  end
-
-  class P2 < Player
-
+    def to_s
+      @name + "(" + @piece.to_s + ")"
+    end
   end
 
   class Piece
@@ -67,13 +69,13 @@ module GameModel
   end
 
   class X < Piece
-    def to_str
+    def to_s
       "X"
     end
   end
 
   class O < Piece
-    def to_str
+    def to_s
       "O"
     end
   end
@@ -82,8 +84,12 @@ module GameModel
     attr_accessor :data, :size
     def initialize(size=3)
       @size = size
-      @data = Array.new(size) { Array.new(size) { |i| i*2 } }
+      # @data = [[X.new(P1.new("Mike")),nil,nil],[X.new(P1.new("Mike")),X.new(P1.new("Mike")),nil],[X.new(P1.new("Mike")),nil,X.new(P1.new("Mike"))]]#Array.new(size) { Array.new(size) { nil }}#X.new(P2.new("Mike")) } }
+      @data = Array.new(size) { Array.new(size) { nil } }
     end
 
+    def full?
+      @data.flatten.reduce(true) { |m, i| m && i }
+    end
   end
 end
