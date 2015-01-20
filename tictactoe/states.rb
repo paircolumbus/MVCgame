@@ -56,6 +56,12 @@ module GameState
     def send(input)
       returned_value = commands(input) 
       return returned_value if returned_value
+
+      if input == ""
+        Model::initialize
+        return SetP1State.new
+      end
+
       invalidInput
     end
     def getQuestion
