@@ -55,3 +55,9 @@ very_scary:
     - 1
     - 2
     - 3
+
+etheral:
+  ambient_description: Pure thoughts dance inside your head.
+  damage_description: (blablabla)
+  damage:
+    - 0

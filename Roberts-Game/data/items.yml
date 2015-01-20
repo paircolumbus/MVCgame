@@ -97,9 +97,6 @@ walnut_bookshelf:
   contains:
     - blue_book
 
-# maple_bookshelf:
-#   description: It's full of books with green covers.
-
 first_hint:
   description: Read this if you are stuck.
   determiner: the
@@ -118,9 +115,45 @@ third_hint:
   determiner: the
   text: You can't rely on your sense of direction down here.
   takeable: true
-  
+
 licorice:
   description: It's kind of stale, but oh well.
   takeable: true
   is_food: true
   hp_bonus: 8
+
+heavenly_hammer:
+  description: It's a hammer made from the ether itself.
+  takeable: true
+
+picture_window:
+  description: It's a stained glass mural depicting a demonic scene.
+  is_door: true
+  unlocks_with: heavenly_hammer
+  locked: true
+
+lens:
+  description: It's a small, glass lens. You're not sure what it fits into.
+  takeable: true
+
+telescope:
+  description: It's a very nice telescope. It's pointed at the sky but it doesn't seem to move.
+  is_door: true
+  locked: true
+  unlocks_with: lens
+
+bathroom_key:
+  description: It's a key for the bathroom.
+  takeable: true
+
+bathroom_door:
+  description: It's an ornate wooden door.
+  is_door: true
+  locked: true
+  unlocks_with: bathroom_key
+
+egg_sandwich:
+  description: It's smells weird but it looks ok.
+  is_food: true
+  takeable: true
+  hp_bonus: 7

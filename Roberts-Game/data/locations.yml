@@ -62,22 +62,76 @@ study:
 
 main_hall:
   short_description: the main hall
-  long_description: You are standing in the main hall. The tile work is quite impressive.
+  long_description: You are standing in the main hall. Th
   environmental_effect: dark
   paths:
     west: study
     east: dining_room
-    # north: main_stairs
+    north: stairs_bottom 
     south: foyer
   items:
     ground: second_hint
 
-# main_stairs:
-#  short_description: the main staircase
-#  long_description: You are standing on a grand staircase made of marble. You can't imagine how much this cost. T
-#  environmental_effect: dark
-#  paths:
-#    south: main_hall
+stairs_bottom:
+ short_description: the bottom of the stairs
+ long_description: You are standing on a grand staircase made of marble. You can't imagine how much this cost.
+ environmental_effect: dark
+ paths:
+   south: main_hall
+   ceiling: stairs_top
+
+stairs_top:
+  short_description: the top of the stairs
+  long_description: You are standing at the top of a beautiful staircase.
+  environmental_effect: dark
+  paths:
+    ground: stairs_bottom
+    south: upper_hall
+
+upper_hall:
+  short_description: a dim hallway
+  long_description: You are standing in a dim hallway.
+  environmental_effect: dark
+  paths:
+    north: stairs_top
+    west: observatory
+    east: master_bedroom
+    south: bathroom
+  items:
+    south: bathroom_door
+
+master_bedroom:
+  short_description: a spacious bedroom
+  long_description: You are standing in a luxurious bedroom. You're pretty sure it's bigger than your apartment.
+  environmental_effect: dark
+  paths:
+    west: upper_hall
+
+bathroom:
+  short_description: a bathroom
+  long_description: You are standing in a bathroom. The tile work is quite impressive.
+  environmental_effect: dark
+  paths:
+    north: upper_hall
+
+observatory:
+  short_description: an observatory
+  long_description: You are standing in an observatory. Star charts decorate the walls.
+  environmental_effect: dark
+  paths:
+    east: upper_hall
+    west: ether
+  items:
+    west: telescope
+
+ether:
+  short_description: the ether
+  long_description: You are floating in the ether. It's impossible to describe with language.
+  environmental_effect: etheral
+  paths:
+    east: observatory
+  items:
+    west: heavenly_hammer
 
 dining_room:
   short_description: the dining room
@@ -138,14 +192,19 @@ slimy_room:
     north: damp_room
     east: moist_room
     west: moist_room
+  items: 
+    ground: licorice
 
 smelly_room:
   short_description: a dungeon chamber
   long_description: You are standing in a room whose stench is almost unbearable.
   environmental_effect: scary
   paths:
-    east: damp_room
-    west: moist_room
+    east: moist_room
+    west: damp_room
+  items:
+    ground: bathroom_key
+    north: egg_sandwich
 
 moist_room:
   short_description: a dungeon chamber
@@ -172,6 +231,8 @@ chapel:
   paths:
     east: lava_room
     north: final_room
+  items:
+    north: picture_window
 
 final_room:
   short_description: a dark room
@@ -179,3 +240,5 @@ final_room:
   environmental_effect: very_scary
   paths:
     south: chapel
+
+

@@ -14,7 +14,7 @@ wraith:
   description: It looks frightening. It's ghostly image lingers in your mind after you look away.
   health: 15
   weakness: blue_book
-  drops: licorice
+  drops: lens
   damage:
     - 1
     - 2
