@@ -62,7 +62,7 @@ study:
 
 main_hall:
   short_description: the main hall
-  long_description: You are standing in the main hall. Th
+  long_description: You are standing in the main hall. The carpets are exquisite!
   environmental_effect: dark
   paths:
     west: study
@@ -73,12 +73,12 @@ main_hall:
     ground: second_hint
 
 stairs_bottom:
- short_description: the bottom of the stairs
- long_description: You are standing on a grand staircase made of marble. You can't imagine how much this cost.
- environmental_effect: dark
- paths:
-   south: main_hall
-   ceiling: stairs_top
+  short_description: the bottom of the stairs
+  long_description: You are standing on a grand staircase made of marble. You can't imagine how much this cost.
+  environmental_effect: dark
+  paths:
+    south: main_hall
+    ceiling: stairs_top
 
 stairs_top:
   short_description: the top of the stairs
@@ -99,6 +99,7 @@ upper_hall:
     south: bathroom
   items:
     south: bathroom_door
+    east: bedroom_door
 
 master_bedroom:
   short_description: a spacious bedroom
@@ -174,6 +175,8 @@ dungeon_entrance:
     north: damp_room
   entities:
     - wraith
+  items:
+    west: bedroom_key
 
 damp_room:
   short_description: a dungeon chamber

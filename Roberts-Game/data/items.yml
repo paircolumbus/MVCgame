@@ -175,3 +175,14 @@ wardrobe:
   description: It's is expertly carved from fine wood.
   contains:
     - chainmail
+
+bedroom_door:
+  description: It's an ornate wooden door.
+  is_door: true
+  locked: true
+  unlocks_with: bedroom_key
+
+bedroom_key:
+  description: It's a key for the bedroom
+  takeable: true
+
