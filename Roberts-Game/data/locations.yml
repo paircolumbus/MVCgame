@@ -106,6 +106,8 @@ master_bedroom:
   environmental_effect: dark
   paths:
     west: upper_hall
+  items:
+    north: wardrobe
 
 bathroom:
   short_description: a bathroom

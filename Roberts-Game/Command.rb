@@ -8,7 +8,7 @@ maybe make Message class and subclasses and let view sort it out?
 
 class Command
   def self.parse sentence
-    rejections = %w(a an the)
+    rejections = %w(a an the some)
     words = sentence.split.map(&:downcase).reject { |word| rejections.member? word }.map(&:to_sym)
 
     return UnknownCommand.new if words.empty?
@@ -62,7 +62,7 @@ class Command
       return UnknownCommand.new if words.length == 1
       item = Assets::get_item words[1..-1].join('_').to_sym
       return DontSeeCommand.new words[1..-1].join(' ') if item.nil?
-      return DisplayMessageCommand.new "You can't equip #{item.determined_name}." if !item.is_weapon
+      return DisplayMessageCommand.new "You can't equip #{item.determined_name}." if !item.is_weapon && !item.is_armor
       return EquipCommand.new item
     when :read
       return UnknownCommand.new if words.length == 1
@@ -224,8 +224,14 @@ class AttackCommand
       return
     end
 
-    weapon_name = player.weapon.nil? ? "bare hands" : player.weapon.name
-    damage_dealt = @entity.take_damage player.weapon
+		if player.weapon
+			weapon_name = player.weapon.name
+			damage = player.weapon
+		elsif
+			weapon_name = "bare hands"
+			damage = player.godly? ? 10000 : 1
+		end
+    damage_dealt = @entity.take_damage damage
     player.notify "You attack the #{@entity.name} with your #{weapon_name} for #{damage_dealt} points."
     if @entity.dead?
       player.location.delete_entity @entity

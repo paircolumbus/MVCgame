@@ -1,6 +1,6 @@
 
 class Item
-  attr_reader :determiner, :takeable, :description, :contains, :is_food, :hp_bonus, :is_weapon, :weapon_damage, :text, :easy_to_read
+  attr_reader :determiner, :takeable, :description, :contains, :is_food, :hp_bonus, :is_weapon, :weapon_damage, :text, :easy_to_read, :is_armor, :damage_protection
 
   def initialize sym, data
     @sym = sym
@@ -17,6 +17,8 @@ class Item
     @weapon_damage = data[:weapon_damage]
     @easy_to_read = !!data[:easy_to_read]
     @text = data[:text]
+		@is_armor = !!data[:is_armor]
+		@damage_protection = data[:damage_protection] || 0
 
     @unlocks_with = Assets::get_item @unlocks_with if !@unlocks_with.nil?
   end

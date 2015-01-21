@@ -22,15 +22,15 @@ class Entity
     player.take_damage damage, "#{determined_name.capitalize} attacks you."
   end
 
-  def take_damage item
-    if item.nil?
-      damage = 1
-    else
-      damage = item.weapon_damage
-      damage *= 5 if @weakness == item
-    end
-    @health = [0, @health - damage].max
-    return damage
+  def take_damage damage
+  	if damage.kind_of? ItemProxy
+  		damage_amount = damage.weapon_damage
+  		damage_amount *= 5 if @weakness == damage
+		elsif
+			damage_amount = damage
+  	end
+    @health = [0, @health - damage_amount].max
+    return damage_amount
   end
 
   def dead?

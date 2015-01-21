@@ -3,7 +3,7 @@ require_relative "../data/assets.rb"
 
 class Player
 
-  attr_reader :location, :health, :messages, :inventory, :weapon
+  attr_reader :location, :health, :messages, :inventory, :weapon, :armor
 	attr_writer :godly
 
   def initialize
@@ -21,7 +21,9 @@ class Player
 
   def take_damage amount, message
   	return if @godly
-    @messages << "#{message} (#{amount} damage)"
+  	amount -= @armor.damage_protection if !@armor.nil?
+  	return if amount <= 0
+    notify "#{message} (#{amount} damage)"
     @health = [0, @health - amount].max
   end
 
@@ -35,7 +37,7 @@ class Player
 
   def go direction
     if !@location.entities.empty? && !@godly
-      @messages << "An entity here won't let you leave!"
+      notify "An entity here won't let you leave!"
       return
     end
 
@@ -94,9 +96,15 @@ class Player
     if item.is_weapon
       hold @weapon if !@weapon.nil?
       @weapon = item
-      use_up item
-      notify "You have equipped #{item.determined_name}."
+		elsif item.is_armor
+			hold @armor if !@armor.nil?
+			@armor = item
+		else
+			return
     end
+    
+		use_up item
+		notify "You have equipped #{item.determined_name}."
   end
 
 	def godly?

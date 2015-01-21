@@ -104,6 +104,7 @@ module GameView
       def show_player_inventory player
         puts "You are holding: #{player.inventory.map {|item| "#{item.determiner} #{item.name}"}.join(", ")}" if !player.inventory.empty?
         puts "You have #{player.weapon.determined_name} equipped." if !!player.weapon
+        puts "You have #{player.armor.determined_name} equipped." if !!player.armor
       end
     end
   end

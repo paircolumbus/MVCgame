@@ -163,3 +163,15 @@ towel_rod:
   is_weapon: true
   weapon_damage: 3
   takeable: true
+
+chainmail:
+  description: It's made of sturdy steel rings.
+  is_armor: true
+  damage_protection: 4
+  takeable: true
+  determiner: some
+
+wardrobe:
+  description: It's is expertly carved from fine wood.
+  contains:
+    - chainmail

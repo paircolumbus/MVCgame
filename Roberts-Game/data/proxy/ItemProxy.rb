@@ -69,6 +69,14 @@ class ItemProxy
     target.text
   end
 
+	def is_armor
+		target.is_armor
+	end
+
+	def damage_protection
+		target.damage_protection
+	end
+	
   private
 
   def target
