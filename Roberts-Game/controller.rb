@@ -32,6 +32,11 @@ class GameController
         command = LookAroundCommand.new
       end
 
+      if @player.won?
+      	Print::win_message
+      	exit
+			end
+
       @player.do_environmental_effect
       @player.location.tick @player
 

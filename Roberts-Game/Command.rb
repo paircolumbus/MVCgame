@@ -76,9 +76,9 @@ class Command
       return DontSeeCommand.new words[1..-1].join(' ') if entity.nil?
       return AttackCommand.new entity
     when :make
-    	return MakePlayerGodlyCommand.new(true) if words[1] == :me && words[2] == :godly
-    	return MakePlayerGodlyCommand.new(false) if words[1] == :me && words[2] == :normal
-    	return UnknownCommand.new
+			return MakePlayerGodlyCommand.new(true) if words[1] == :me && words[2] == :godly
+			return MakePlayerGodlyCommand.new(false) if words[1] == :me && words[2] == :normal
+			return UnknownCommand.new
     end
 
     return UnknownCommand.new
@@ -236,7 +236,9 @@ class AttackCommand
     if @entity.dead?
       player.location.delete_entity @entity
       player.notify "You have defeated #{@entity.determined_name}!"
-      if !!@entity.drops
+      if @entity == Assets::get_entity(:storm_demon)
+				player.won = true
+			elsif !!@entity.drops
         player.location.items[:ground] = @entity.drops
         player.notify "It dropped #{@entity.drops.determined_name}."
       end

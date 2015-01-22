@@ -5,6 +5,7 @@ class Player
 
   attr_reader :location, :health, :messages, :inventory, :weapon, :armor
 	attr_writer :godly
+	attr_writer :won
 
   def initialize
     @location = Assets::get_location :front_gate
@@ -12,6 +13,7 @@ class Player
     @messages = []
     @inventory = []
     @godly = false
+    @won = false
   end
 
   def do_environmental_effect
@@ -109,5 +111,9 @@ class Player
 
 	def godly?
 		@godly
+	end
+	
+	def won?
+		@won
 	end
 end

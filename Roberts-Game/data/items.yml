@@ -116,6 +116,12 @@ third_hint:
   text: You can't rely on your sense of direction down here.
   takeable: true
 
+fourth_hint:
+  description: Read this if you are stuck.
+  determiner: the
+  text: Are doors and windows really all that different?
+  takeable: true
+
 licorice:
   description: It's kind of stale, but oh well.
   takeable: true
@@ -184,5 +190,11 @@ bedroom_door:
 
 bedroom_key:
   description: It's a key for the bedroom
+  takeable: true
+
+hounds_tooth:
+  description: It's extremely sharp!
+  is_weapon: true
+  weapon_damage: 20
   takeable: true
 

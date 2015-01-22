@@ -242,6 +242,7 @@ chapel:
     north: final_room
   items:
     north: picture_window
+    east: fourth_hint
 
 final_room:
   short_description: a dark room

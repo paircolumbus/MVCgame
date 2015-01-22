@@ -24,7 +24,17 @@ hell_hound:
   description: It's a large black dog with a slobbering maw full of razor sharp teeth and glowing red eyes.
   health: 50
   weakness: towel_rod
+  drops: hounds_tooth
   damage:
-    - 0
-    - 2
     - 3
+    - 4
+    - 5
+      
+storm_demon:
+  description: It must be what is causing the storm prevening you from going home.
+  health: 100
+  weakness: hounds_tooth
+  damage:
+    - 5
+    - 6
+    - 7

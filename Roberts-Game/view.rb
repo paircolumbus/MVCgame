@@ -13,7 +13,6 @@ module GameView
 
       def title_screen
         puts Assets::get_string :title
-        puts
       end
 
       def state_description player
@@ -21,8 +20,7 @@ module GameView
       end
 
       def fetch_command
-        puts
-        print "> "
+        print "\n> "
         command = Command::parse gets.chomp
         puts
         return command
@@ -34,7 +32,6 @@ module GameView
 
       def help_message
         puts Assets::get_string :help
-        puts
       end
 
       def look_around_message player
@@ -49,6 +46,10 @@ module GameView
         show_player_messages player
         exit_message
       end
+      
+      def win_message
+				puts Assets::get_string :win_message
+			end
 
       private
 
@@ -61,18 +62,13 @@ module GameView
       def show_player_health player
         health_meter = "HP [" + "=" * player.health + " " * (10 - player.health) + "]"
 
-        case player.health
-        when 10
-          human_message = Assets::get_string :hp_perfect
-        when 8...10
-          human_message = Assets::get_string :hp_okay
-        when 4...8
-          human_message = Assets::get_string :hp_not_so_good
-        when 1...4
-          human_message = Assets::get_string :hp_dying
-        else
-          human_message = Assets::get_string :hp_dead
-        end
+        human_message = Assets::get_string case player.health
+    																			 when 10 then Assets::get_string :hp_perfect
+																					 when 8...10 then Assets::get_string :hp_okay
+																					 when 4...8 then Assets::get_string :hp_not_so_good
+																					 when 1...4 then Assets::get_string :hp_dying
+																					 else Assets::get_string :hp_dead
+																					 end
 
         puts "#{health_meter} #{human_message}"
         puts "YOU ARE GODLY." if player.godly?

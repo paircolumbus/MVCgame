@@ -59,3 +59,14 @@ solution: |
     "equip blue book"
     "attack wraith"
   8.
+win_message: |
+  You leave the dark room.
+  You leave the chapel.
+  You leave the dungeon.
+  You climb back into the library.
+  You exit the house through the foyer.
+  The storm has cleared.
+  You may now go home.
+  
+  YOU HAVE DEFEATED HELL HOUSE.
+  Thanks for playing!
