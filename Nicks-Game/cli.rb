@@ -17,8 +17,11 @@ end.parse!
 
 game = Game.new options
 
-puts 'Welcome to the guessing game!'
-puts "You have #{game.settings.guess_limit || 'unlimited'} tries to guess a number from 1 to #{game.settings.max}."
+puts <<-EOF
+Welcome to the guessing game!
+You have #{game.settings.guess_limit || 'unlimited'} tries to guess a number from 1 to #{game.settings.max}.
+EOF
+
 loop do
   if game.guesses_remaining == 0
     puts 'You ran out of tries... You lose!'

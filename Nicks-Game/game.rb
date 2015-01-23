@@ -10,7 +10,7 @@ class Game
   end
 
   def guess(number)
-    if @guesses_remaining.is_a? Numeric
+    unless @guesses_remaining.nil?
       raise RunTimeError, 'No guesses remaining' unless @guesses_remaining > 0
       @guesses_remaining -= 1
       @guesses_used += 1
