@@ -31,7 +31,7 @@ class RetirementAccountScenario
     yearly_withdraw = (balance_at_retirement / years_in_retirement).round
     if ira_type == :roth
       yearly_withdraw
-    else
+    else #Must take out taxes
       (yearly_withdraw * (1.0 - retirement_tax_rate)).round
     end
   end

@@ -5,16 +5,12 @@ class GameController
   include GameView
 
   def run!
-    sample_values = {name: "Sample Scenario",
-                     beginning_age: 23}
+    sample_values = {name: "Sample Scenario", beginning_age: 23}
     scenario1 = RetirementAccountScenario.new sample_values
     scenario2 = RetirementAccountScenario.new sample_values
 
     Print::run_spinner
     Print::title_screen
-
-    #Make todoList methods like RESTful endpoints (new/edit/update/delete)
-    #Think Backbone Model & View
 
     loop do
       Print::menu
