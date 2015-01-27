@@ -53,21 +53,21 @@ EOS
 
       def add_scenario_output(output, scenario)
         output[1]  += sprintf("%-32s", scenario.name)
-        output[3]  += sprintf("%-12d", scenario.beginning_age)
-        output[4]  += sprintf("%-12d", scenario.retirement_age)
-        output[5]  += sprintf("%-12d", scenario.death_age)
-        output[6]  += sprintf("$%-11d", scenario.annual_contribution)
-        output[7]  += sprintf("%-12.2f", scenario.accumulation_market_return_rate)
-        output[8]  += sprintf("%-12.2f", scenario.accumulation_tax_rate)
-        output[9]  += sprintf("%-12.2f", scenario.retirement_tax_rate)
-        output[10] += sprintf("%-12s", scenario.ira_type.to_s)
-        output[12] += sprintf("$%-11d", scenario.retirement_income)
+        output[3]  += sprintf("%-11d", scenario.beginning_age)
+        output[4]  += sprintf("%-11d", scenario.retirement_age)
+        output[5]  += sprintf("%-11d", scenario.death_age)
+        output[6]  += sprintf("$%-10d", scenario.annual_contribution)
+        output[7]  += sprintf("%-11.2f", scenario.accumulation_market_return_rate)
+        output[8]  += sprintf("%-11.2f", scenario.accumulation_tax_rate)
+        output[9]  += sprintf("%-11.2f", scenario.retirement_tax_rate)
+        output[10] += sprintf("%-11s", scenario.ira_type.to_s)
+        output[12] += sprintf("$%-10d", scenario.retirement_income)
       end
 
       def add_frame(output)
-        output[0]   += "********************************"
+        output[0]   += "******************************* "
         output[1]   += ""
-        output[2]   += "********************************"
+        output[2]   += "******************************* "
         output[3]   += ""
         output[4]   += ""
         output[5]   += ""
@@ -76,9 +76,9 @@ EOS
         output[8]   += ""
         output[9]   += ""
         output[10]  += ""
-        output[11]  += "********************************"
+        output[11]  += "******************************* "
         output[12]  += ""
-        output[13]  += "********************************"
+        output[13]  += "******************************* "
       end
 
       def add_row_header(output)
@@ -99,13 +99,10 @@ EOS
       end  
 
       def results_output(scenario1, scenario2)
-        if scenario1.retirement_income == scenario2.retirement_income
-          "Result: both scenarios generate the same income in retirement."
-        elsif scenario1.retirement_income > scenario2.retirement_income
-          "Result: #{scenario1.name} generates $#{scenario1.retirement_income - scenario2.retirement_income} more income in retirement!"
-        else 
-          "Result: #{scenario2.name} generates $#{scenario2.retirement_income - scenario1.retirement_income} more income in retirement!"
-        end
+        difference = (scenario1.retirement_income - scenario2.retirement_income).abs 
+        return "Result: both scenarios generate the same income in retirement." if difference == 0
+        return "Result: #{scenario1.name} generates $#{difference} more income in retirement!" if scenario1.retirement_income > scenario2.retirement_income
+        return "Result: #{scenario2.name} generates $#{difference} more income in retirement!" if scenario2.retirement_income > scenario1.retirement_income
       end
 
       def serialize_scenario
