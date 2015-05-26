@@ -20,9 +20,7 @@ class VoteCounter
 
   def winning_items
     max_votes = @items.map { |y| y.votes }.sort.last
-    winners = @items.select { |x| x.votes == max_votes }
-
-    winners
+    @items.select { |x| x.votes == max_votes }
   end
 
   def delete(item)
