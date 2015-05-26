@@ -1,6 +1,8 @@
 class VoteCounter
   attr_reader :items
 
+  # TODO explicit return -> turnary
+
   def initialize
     @items = []
   end
@@ -11,11 +13,8 @@ class VoteCounter
   end
 
   def vote_for(name)
-    if (item = @items.find { |x| x.name == name })
-      item.vote
-    else
-      false
-    end
+    return false unless (item = @items.find { |x| x.name == name })
+    item.vote
   end
 
   def winning_items
