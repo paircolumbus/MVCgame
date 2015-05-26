@@ -5,8 +5,16 @@ class VoteCounter
     @items = []
   end
 
-  def add_item!(name)
+  def add_item(name)
     @items << Item.new(name)
+  end
+
+  def vote_for(item)
+    if (item = @items.find { |x| x.name == item })
+      item.vote
+    else
+      false
+    end
   end
 
   def winning_items
@@ -16,9 +24,8 @@ class VoteCounter
     winners
   end
 
-  def delete!(item)
-    return false if @items.none? { |x| x.name == item }
-    @items.delete_if { |x| x.name == item }
+  def delete(item)
+    @items.reject! { |x| x.name == item }
   end
 end
 
@@ -30,7 +37,7 @@ class Item
     @votes = 0
   end
 
-  def vote!
+  def vote
     @votes += 1
   end
 end

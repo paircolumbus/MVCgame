@@ -30,6 +30,14 @@ EOS
         puts "#{name} is not present anyways!"
       end
 
+      def item_not_added_error(name)
+        puts "#{name} has not been added!"
+      end
+
+      def invalid_option_error
+        puts "Invalid option!"
+      end
+
       def goodbye
         puts "See you later!"
       end
@@ -47,7 +55,7 @@ EOS
         when 0
           puts "No votes yet!"
         when 1
-          puts "#{winners.first.name} is in the lead!"
+          puts "#{winners.first} is in the lead!"
         else
           puts "#{winners.join ","} are in the lead!"
         end

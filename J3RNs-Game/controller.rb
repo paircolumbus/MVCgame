@@ -16,30 +16,20 @@ class VoteController
       when "S"
         Print::show_votes(vote_counter.items)
       when "A"
-        new_item = Print::get_item
-        vote_counter.add_item!(new_item)
+        vote_counter.add_item(Print::get_item)
       when "V"
         item = Print::get_vote
-        items = vote_counter.items
-        if (index = items.map { |x| x.name }.find_index(item)) != nil
-          items[index].vote!
-        else
-          Print::error_message "#{item} has not been added!"
-        end
+        Print::item_not_added_error unless vote_counter.vote_for(item)
       when "D"
         to_delete = Print::get_deletion
-        if vote_counter.delete!(to_delete)
-          Print::error_message "#{to_delete} deleted"
-        else
-          Print::not_present_error to_delete
-        end
+        Print::not_present_error(to_delete) unless vote_counter.delete(to_delete)
       when "W"
         Print::winner(vote_counter.winning_items.map { |x| x.name })
       when "Q"
         Print::goodbye
         exit
       else
-        Print::error_message "Invalid option!"
+        Print::invalid_option_error
       end
     end
   end
