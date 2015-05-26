@@ -9,8 +9,8 @@ class VoteCounter
     @items << Item.new(name)
   end
 
-  def vote_for(item)
-    if (item = @items.find { |x| x.name == item })
+  def vote_for(name)
+    if (item = @items.find { |x| x.name == name })
       item.vote
     else
       false
