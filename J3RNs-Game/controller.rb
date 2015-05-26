@@ -31,7 +31,7 @@ class VoteController
         if vote_counter.delete!(to_delete)
           Print::error_message "#{to_delete} deleted"
         else
-          Print::not_present_anyways to_delete
+          Print::not_present_error to_delete
         end
       when "W"
         Print::winner(vote_counter.winning_items.map { |x| x.name })
