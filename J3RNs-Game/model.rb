@@ -6,7 +6,7 @@ class VoteCounter
   end
 
   def add_item(name)
-    return false if @item.find { |x| x.name == name }
+    return false if @items.find { |x| x.name == name }
     @items << Item.new(name)
   end
 
