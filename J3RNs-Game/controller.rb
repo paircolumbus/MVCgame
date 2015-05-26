@@ -19,7 +19,7 @@ class VoteController
         vote_counter.add_item(Print::get_item)
       when "V"
         item = Print::get_vote
-        Print::item_not_added_error unless vote_counter.vote_for(item)
+        Print::item_not_added_error(item) unless vote_counter.vote_for(item)
       when "D"
         to_delete = Print::get_deletion
         Print::not_present_error(to_delete) unless vote_counter.delete(to_delete)
