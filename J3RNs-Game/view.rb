@@ -57,7 +57,7 @@ EOS
         when 1
           puts "#{winners.first} is in the lead!"
         else
-          puts "#{winners.join ","} are in the lead!"
+          puts "#{winners.join ", "} are in the lead!"
         end
       end
 
