@@ -22,7 +22,7 @@ class Zoo
 	end
 
 	def add_animal(input)
-		@animals << Animal.new(input.merge(fetch_id))
+		@animals << Animal.new(input.merge(get_id))
 	end
 
 	def sell_animal(id)
@@ -41,7 +41,7 @@ class Zoo
 
 	private
 
-	def fetch_id
+	def get_id
 		{id: @primary_id +=1}
 	end
 end
