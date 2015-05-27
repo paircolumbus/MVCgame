@@ -29,6 +29,10 @@ class Zoo
 		@animals.delete_if { |n| n.id == id}
 	end
 
+	def export_animal(id)
+		@animals.delete_if { |n| n.id == id }
+	end
+
 	def import_animals
 		add_animal(name: "Zebra", description: "part of the horse family with distinctive black and white stripes", weight: 700)
 		add_animal(name: "Elephant", description: "large mammals, herbivores, and gray", weight: 15000)

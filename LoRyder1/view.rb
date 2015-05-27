@@ -49,10 +49,13 @@ module GameView
 			def serialize_animal
 				{}.tap do |obj|
 					["\nEnter the animal name:", "\nEnter the description:", "\nEnter the weight:"].each do |t|
+						# puts obj.inspect
 						if obj.empty?
 							obj[:name] = get_user_input(t)
-						else
+						elsif obj.count == 1
 							obj[:description] = get_user_input(t)
+						else
+							obj[:weight] = get_user_input(t)
 						end
 					end
 				end
@@ -60,7 +63,7 @@ module GameView
 			end
 
 			def deleted_id
-				gimme_id = "\nEnter the id of the animal you want to sell"
+				the_id = "\nEnter the id of the animal you want to sell"
 				get_user_input(the_id)
 			end
 

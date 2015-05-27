@@ -18,7 +18,7 @@ class GameController
 			when "B"
 				animalsZoo.add_animal(Print::serialize_animal)
 			when "C"
-				"hey"
+				animalsZoo.export_animal(Print::deleted_id.to_i)
 			when "D"
 				puts "Thanks for visiting the Zoo"
 				exit
