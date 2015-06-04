@@ -43,6 +43,7 @@ class DiceList
 
 end
 
+# Not used currently, can be implemented to see past rolls.
 class History
   attr_reader :history
 
