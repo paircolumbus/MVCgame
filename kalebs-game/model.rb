@@ -2,7 +2,7 @@ class Die
   attr_reader :value
 
   def initialize
-    @value = rand(5) + 1
+    @value = rand(6) + 1
   end
 end
 
