@@ -7,7 +7,6 @@ class GameController
   def run!
     dice = DiceList.new
 
-    Print::run_loader
     Print::title_screen
 
     loop do

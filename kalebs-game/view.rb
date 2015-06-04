@@ -3,11 +3,6 @@ module GameView
   module Print
 
     class << self
-      def run_loader
-        print "Loading, please wait"
-        5.times { print "*"; sleep 1; }
-        print "\n"
-      end
 
       def error_message
         puts "I don't understand that command"
