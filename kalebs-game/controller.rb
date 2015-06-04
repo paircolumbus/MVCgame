@@ -19,7 +19,7 @@ class GameController
         Print::did_i_win(dice.yahtzee?)
       # when "X"
       #   dice.reset!
-      when "C"
+    when "r"
         dice.win!
         dice.each { |die| Print::print_die(die.value) }
         Print::did_i_win(dice.yahtzee?)
