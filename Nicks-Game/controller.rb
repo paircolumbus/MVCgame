@@ -10,22 +10,19 @@ class GameController
     Print::run_spinner
     Print::title_screen
 
-    #Make todoList methods like RESTful endpoints (new/edit/update/delete)
-    #Think Backbone Model & View
-
     loop do
       Print::menu
       case Print::fetch_user_input
       when "P"
         hangman.reset
-        Print::play hangman
+        Print::play(hangman.play)
         loop do
           hangman.guess(Print::fetch_user_input)
           if hangman.done
             Print::finish
             break
           else
-            Print::play hangman
+            Print::play(hangman.play)
           end
         end
       when "Q"

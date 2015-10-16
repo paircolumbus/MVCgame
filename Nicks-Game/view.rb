@@ -36,15 +36,9 @@ EOS
         puts menu
       end
 
-      def play(hangman)
-        puts "Guess a letter (#{hangman.maxtries - hangman.tries} tries remaining) (ctrl-c to quit):"
-        hangman.word.chars.each do |letter|
-          if hangman.guessed.include?(letter)
-            print letter + ' '
-          else
-            print '_ '
-          end
-        end
+      def play(gamestate)
+        puts "Guess a letter (#{gamestate[:tries]} tries remaining) (ctrl-c to quit):"
+        puts gamestate[:playString]
       end
 
       def finish

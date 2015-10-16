@@ -30,7 +30,21 @@ class Hangman
     @word.chars.all? { |letter| @guessed.include?(letter) }
   end
 
+  # start a new game
   def reset
     initialize
+  end
+
+  # sends hash of gamestate (string, tries) through controller to view
+  def play
+    playString = ''
+    @word.chars.each do |letter|
+      if guessed.include?(letter)
+        playString += letter + ' '
+      else
+        playString += '_ '
+      end
+    end
+    { playString: playString, tries: @maxtries - @tries }
   end
 end
