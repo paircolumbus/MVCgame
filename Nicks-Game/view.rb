@@ -41,7 +41,8 @@ EOS
         puts gamestate[:playString]
       end
 
-      def finish
+      def finish(word)
+        puts "The word was #{word}!"
         puts "Thanks for playing!"
         Print::run_spinner
       end

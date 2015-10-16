@@ -19,7 +19,7 @@ class GameController
         loop do
           hangman.guess(Print::fetch_user_input)
           if hangman.done
-            Print::finish
+            Print::finish(hangman.word)
             break
           else
             Print::play(hangman.play)

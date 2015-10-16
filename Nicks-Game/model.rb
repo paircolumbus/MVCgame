@@ -2,7 +2,7 @@ class Hangman
   attr_reader :word, :guessed, :tries, :maxtries
 
   def initialize
-    @word = "special".upcase
+    @word = File.readlines('words.txt').sample.strip.upcase
     @guessed = []
     @tries = 0
     @maxtries = 10
