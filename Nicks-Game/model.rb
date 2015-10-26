@@ -4,14 +4,16 @@ class Hangman
 
   def initialize
     @word = File.readlines('words.txt').sample.strip.upcase
+    @letters_left = @word.dup
     @guessed = []
     @tries = 0
   end
 
   # apply a user's guessed character
   def guess(char)
-    @guessed.push(char.upcase)
+    @guessed.push(char)
     @tries += 1
+    @letters_left.delete! char
   end
 
   # is the game over?
@@ -21,7 +23,7 @@ class Hangman
 
   # do the user's combined guesses reveal the secret word?
   def guessmatch
-    word.chars.all? { |letter| @guessed.include?(letter) }
+    @letters_left.empty?
   end
 
   # start a new game

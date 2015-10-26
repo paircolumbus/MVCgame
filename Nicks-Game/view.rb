@@ -50,7 +50,7 @@ EOS
       def fetch_user_input(question=nil)
         puts question if question
         print "> "
-        gets.chomp
+        gets.chomp.upcase
       end
     end
   end
