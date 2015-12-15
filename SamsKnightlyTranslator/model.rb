@@ -13,11 +13,11 @@ module TranslatorModel
   module Schema
     WORDS_REGEX = /\w+[a-z']*/
     class << self
-      def import_translation_schema source = 'schema.json'
+      def import_translation_schema source = 'translations.json'
         JSON.parse(File.new(source).read)
       end
 
-      def export_translation_schema(translation_dict, target = 'schema.json')
+      def export_translation_schema(translation_dict, target = 'translations.json')
         File.open(target, "w") do |f|
           f.write(JSON.dump(translation_dict))
         end
