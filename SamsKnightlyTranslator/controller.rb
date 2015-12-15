@@ -24,7 +24,7 @@ class TranslatorController
     gets.chomp
     user_input = nil
 
-    until ['quit', 'q', 'exit', 'e'].include? @user_input
+    until ['quit', 'q', 'exit', 'e'].include? user_input
       Display::menu
       user_input = gets.chomp.downcase
       case user_input
@@ -34,7 +34,7 @@ class TranslatorController
       when 'd' then nil
       when 's' then save_schema
       else
-        puts translate @user_input
+        puts translate user_input
       end
       pause
     end
