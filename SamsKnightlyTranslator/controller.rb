@@ -31,13 +31,14 @@ class TranslatorController
       when 'v' then Display::print_schema(translation_dict)
       when 'a' then add_new_entry
       when 'u' then nil
-      when 'd' then nil
+      when 'd' then delete_entry
       when 's' then save_schema
       else
         puts translate user_input
       end
       pause
     end
+    puts "~ Fare thee well ~"
   end
 
   def pause
@@ -55,10 +56,15 @@ class TranslatorController
 
   def add_new_entry
     Display::request_english_word
-    original = gets.chomp
+    original = get_input
+
+    if @translation_dict[original]
+      puts "Translation already exists; use (U)pdate to modify."
+      return
+    end
 
     Display::request_translation
-    translated = gets.chomp
+    translated = get_input
 
     puts "Save new translation: #{original} => #{translated}?"
     if confirm?
@@ -79,7 +85,23 @@ class TranslatorController
     end
   end
 
+  def delete_entry
+    puts "Enter the translation you want to destroy by its modern English word"
+    target = get_input
 
+    case
+    when (@translation_dict.keys.include? target)
+      puts "Destroy #{target} => #{@translation_dict[target]}?"
+      if confirm?
+        @translation_dict.delete target
+        puts "Translation deleted."
+      else
+        puts "Canceling deletion."
+      end
+    else
+      puts "Translation not found in current schema. Returning to menu."
+    end
+  end
 end
 
 translator = TranslatorController.new
