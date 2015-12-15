@@ -1,0 +1,20 @@
+Organizational thoughts:
+
+initialization:
+load translation dictionary from file (JSON)
+
+
+view:
+[T]RANSLATE text
+[V]IEW existing translations
+[A]DD new translation
+[U]PDATE a translation
+[D]ELETE a translation
+[S]AVE updated pairings to JSON
+
+logic for displaying the above
+
+controller
+
+Needs to have actions mapped for
+
