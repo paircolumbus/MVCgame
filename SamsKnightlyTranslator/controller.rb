@@ -43,7 +43,7 @@ class TranslatorController
 
   def pause
     Display::pause
-    gets.chomp
+    get_input
   end
 
   def get_input
