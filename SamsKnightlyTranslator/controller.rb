@@ -30,7 +30,7 @@ class TranslatorController
       case user_input
       when 'v' then Display::print_schema(translation_dict)
       when 'a' then add_new_entry
-      when 'u' then nil
+      when 'u' then update_entry
       when 'd' then delete_entry
       when 's' then save_schema
       else
@@ -86,7 +86,7 @@ class TranslatorController
   end
 
   def delete_entry
-    puts "Enter the translation you want to destroy by its modern English word"
+    Display::request_english_word
     target = get_input
 
     case
@@ -100,6 +100,27 @@ class TranslatorController
       end
     else
       puts "Translation not found in current schema. Returning to menu."
+    end
+  end
+
+  def update_entry
+    Display::request_english_word
+    target = get_input
+
+    case
+    when @translation_dict.keys.include?(target)
+      puts "Current translation: #{target} => #{@translation_dict[target]}"
+      puts "Enter new translation for this word."
+      new_translation = get_input
+
+      puts "Save updated entry: #{target} => #{new_translation}?"
+      if confirm?
+        @translation_dict[target] = new_translation
+        "Entry updated."
+      else
+        puts "Canceled update."
+      end
+    else puts "No entry found to update. Use (A)dd to enter a new entry."
     end
   end
 end
