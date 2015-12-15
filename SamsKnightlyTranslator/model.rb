@@ -27,6 +27,9 @@ module TranslatorModel
         target_dict[original] = translated
       end
 
+      def destroy_entry(target_dict, entry_key)
+        target_dict.delete entry_key
+      end
     end
   end
 end

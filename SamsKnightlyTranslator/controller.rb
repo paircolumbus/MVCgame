@@ -94,7 +94,7 @@ class TranslatorController
     when (@translation_dict.keys.include? target)
       puts "Destroy #{target} => #{@translation_dict[target]}?"
       if confirm?
-        @translation_dict.delete target
+        Schema::destroy_entry(@translation_dict, target)
         puts "Translation deleted."
       else
         puts "Canceling deletion."
