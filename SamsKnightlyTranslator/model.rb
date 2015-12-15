@@ -22,6 +22,11 @@ module TranslatorModel
           f.write(JSON.dump(translation_dict))
         end
       end
+
+      def update_entry(target_dict, original, translated)
+        target_dict[original] = translated
+      end
+
     end
   end
 end

@@ -68,7 +68,8 @@ class TranslatorController
 
     puts "Save new translation: #{original} => #{translated}?"
     if confirm?
-      @translation_dict[original] = translated
+      Schema::update_entry(@translation_dict, original, translated)
+      #@translation_dict[original] = translated
       puts "Change saved."
     else
       puts "Change rejected."
@@ -115,8 +116,9 @@ class TranslatorController
 
       puts "Save updated entry: #{target} => #{new_translation}?"
       if confirm?
-        @translation_dict[target] = new_translation
-        "Entry updated."
+        Schema::update_entry(@translation_dict, target, new_translation)
+        #@translation_dict[target] = new_translation
+        puts "Entry updated."
       else
         puts "Canceled update."
       end
