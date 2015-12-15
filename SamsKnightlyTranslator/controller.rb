@@ -64,7 +64,7 @@ class TranslatorController
 
   def save_schema
     puts "Save current translation schema to file?"
-
+    confirmation = gets.chomp.downcase
     if ['y', 'yes'].include?(confirmation)
       Schema::export_translation_schema(@translation_dict)
       puts "New schema saved."
@@ -72,7 +72,6 @@ class TranslatorController
       puts "Schema changes cancelled."
     end
   end
-
 end
 
 translator = TranslatorController.new

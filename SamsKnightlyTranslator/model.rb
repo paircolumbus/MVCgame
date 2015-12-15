@@ -19,7 +19,7 @@ module TranslatorModel
 
       def export_translation_schema(translation_dict, target = 'schema.json')
         File.open(target, "w") do |f|
-          f.write(translation_dict)
+          f.write(JSON.dump(translation_dict))
         end
       end
     end
