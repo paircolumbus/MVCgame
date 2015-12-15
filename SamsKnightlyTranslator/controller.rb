@@ -21,7 +21,7 @@ class TranslatorController
 
   def play
     Display::title
-    gets.chomp
+    pause
     user_input = nil
 
     until ['quit', 'q', 'exit', 'e'].include? user_input
@@ -45,6 +45,14 @@ class TranslatorController
     gets.chomp
   end
 
+  def get_input
+    gets.chomp.downcase
+  end
+
+  def confirm?
+    ['y', 'yes'].include? get_input
+  end
+
   def add_new_entry
     Display::request_english_word
     original = gets.chomp
@@ -53,8 +61,7 @@ class TranslatorController
     translated = gets.chomp
 
     puts "Save new translation: #{original} => #{translated}?"
-    confirmation = gets.chomp.downcase
-    if ['y', 'yes'].include?(confirmation)
+    if confirm?
       @translation_dict[original] = translated
       puts "Change saved."
     else
@@ -64,14 +71,15 @@ class TranslatorController
 
   def save_schema
     puts "Save current translation schema to file?"
-    confirmation = gets.chomp.downcase
-    if ['y', 'yes'].include?(confirmation)
+    if confirm?
       Schema::export_translation_schema(@translation_dict)
       puts "New schema saved."
     else
       puts "Schema changes cancelled."
     end
   end
+
+
 end
 
 translator = TranslatorController.new

@@ -74,7 +74,7 @@ MENU
       end
 
       def pause
-        puts "Press enter to return to menu"
+        puts "Press enter to continue"
       end
 
       def request_english_word
