@@ -11,25 +11,24 @@ class Game
   def winner?
 
   end
+
+  def add_to_register(move)
+    @game.moves << move
+  end
 end
 
 class Move
   attr_reader :symbol, :loc, :game
   @@count = 0
 
-  def initialize(x_loc, y_loc, game)
+  def initialize(location, game)
     @@count += 1
     @id = @@count
-    @loc = {x: x_loc, y: y_loc}
+    @loc = location
     @game = game
-
-    add_move_to_register
+    @symbol = @id.even? ? "X" : "O"
   end
 
-  # move this method to the controller?
-  def add_move_to_register
-    @game.moves << @loc
-  end
 end
 
 # g = Game.new

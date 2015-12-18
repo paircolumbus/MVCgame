@@ -1,16 +1,15 @@
+require_relative "model"
+require_relative "view"
+
 class Controller
   def execute
     # show menu
-    # run game until it is over
+    @game = Game.new
+    @board = Board.new
+    new_move
+    # new moves until game is over
     # display game information
     # show menu
-  end
-
-  def run_game
-    # player whose move it is goes
-    # check for win
-    # change whose move it is
-    # repeat
   end
 
   def show_menu
@@ -20,10 +19,26 @@ class Controller
   end
 
   def new_move
-    # get user input, parse
-    # create Move.new
-    # add the move the game.moves
-    # tell the view to add the move to the pixel array
-    # and draw
+    # request, parse, and validate input
+    move = Move.new(input, @game)
+    @board.add_to_pixel_array(move)
+    @board.draw
+    # model.add_to_register(move)
+    # view.add_to_pixel_array(move)
+    # view.draw
   end
+
+  def input
+    print "row (1-3): "
+    x = gets.chomp.to_i
+    print "column (1-3): "
+    y = gets.chomp.to_i
+    {x: x, y: y}
+  end
+
+
 end
+
+c = Controller.new
+c.execute
+

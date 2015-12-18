@@ -15,12 +15,17 @@ class Board
     @pixel_array.each{ |row| puts row.join }
   end
 
-  # private
+  def add_to_pixel_array(move)
+    x_dim = pixelize(move.loc[:x], @square_height)
+    y_dim = pixelize(move.loc[:y], @square_width)
+    @pixel_array[x_dim][y_dim] = move.symbol
+  end
+
+  private
   def total_length(square_length)
     3 * square_length - 1
   end
 
-  # move this to the model?
   def set_pixel_array
     for row in 1..total_length(@square_height)
       row_output = []
@@ -37,12 +42,6 @@ class Board
       end
       @pixel_array << row_output
     end
-  end
-
-  def add_move_to_pixel_array(symbol, location)
-    x_dim = pixelize(location[:x], @square_width)
-    y_dim = pixelize(location[:y], @square_height)
-    @pixel_array[y_dim][x_dim] = symbol
   end
 
   def pixelize(value, square_length)
