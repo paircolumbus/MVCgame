@@ -9,15 +9,12 @@ class Controller
       puts ""
       sleep 1
       case input
-      when "Q"
-        puts "Quitting gracefully..."
-        puts ""
-        sleep 2
-        %x( ^c )
       when "S"
         run_game
       when "R"
         display_move_list
+      when "Q"
+        quit_gracefully
       else
         puts "You aren't very good at this, are you?"
       end
@@ -27,6 +24,13 @@ class Controller
 
   def run_menu
     Menu.new.list_options
+  end
+
+  def quit_gracefully
+    puts "Quitting gracefully..."
+    puts ""
+    sleep 2
+    %x( ^c )
   end
 
   def display_move_list
@@ -57,10 +61,11 @@ class Controller
       new_move
     end
     sleep 1
+    print "It's over.  "
     if @game.winner? == "X" || @game.winner? == "O"
-      puts "It's over!  #{@game.winner?}'s win"
+      puts "#{@game.winner?}'s win."
     else
-      puts "It's over!  It's a tie!"
+      puts "It's a tie.  How dull..."
     end
   end
 
@@ -99,9 +104,7 @@ class Controller
     end
   end
 
-
 end
 
-c = Controller.new
-c.execute
+Controller.new.execute
 
