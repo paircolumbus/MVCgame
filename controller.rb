@@ -6,11 +6,14 @@ class Controller
     # show menu
     @game = Game.new
     @board = Board.new
-    # 5.times {new_move}
     while !@game.winner? do
       new_move
     end
-    puts "It's over!  #{@game.winner?}'s win"
+    if @game.winner? == "X" || @game.winner? == "O"
+      puts "It's over!  #{@game.winner?}'s win"
+    else
+      puts "It's over!  It's a tie!"
+    end
     # display game information
     # show menu
   end

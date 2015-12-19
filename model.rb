@@ -8,7 +8,7 @@ class Game
   end
 
   def winner?
-    row_winner? || col_winner? || diag_winner?
+    row_winner? || col_winner? || diag_winner? || @move_list.count >= 9
   end
 
   def register(move)
