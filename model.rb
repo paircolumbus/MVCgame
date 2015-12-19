@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :move_list, :grid
+  attr_reader :move_list, :grid
   
   def initialize
     @move_list = []
@@ -24,19 +24,22 @@ class Game
     # check diagonals for winner
     result ||= (@grid[0][0] == @grid[1][1] && @grid[1][1] == @grid[2][2] && @grid[2][2])
     result ||= (@grid[0][2] == @grid[1][1] && @grid[1][1] == @grid[2][0] && @grid[2][0])
+
+    # check for tie
+    # interesting project: better tie-detecting method
+    result ||= @move_list.count >= 9
   end
 
 end
 
 class Move
-  attr_reader :symbol, :loc, :game
+  attr_reader :symbol, :loc
   @@count = 0
 
-  def initialize(location, game)
+  def initialize(location)
     @@count += 1
     @id = @@count
     @loc = location
-    @game = game
     @symbol = @id.even? ? "O" : "X"
   end
 end
