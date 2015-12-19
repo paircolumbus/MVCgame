@@ -7,10 +7,6 @@ class Game
     @grid = [[nil, nil, nil],[nil, nil, nil],[nil, nil, nil]]
   end
 
-  def winner?
-    row_winner? || col_winner? || diag_winner? || @move_list.count >= 9
-  end
-
   def register(move)
     @move_list << move
     x = move.loc[:x]
@@ -18,22 +14,21 @@ class Game
     @grid[x][y] = move.symbol
   end
 
-  def row_winner?
-    (@grid[0][0] == @grid[0][1] && @grid[0][1] == @grid[0][2] && @grid[0][2]) ||
-    (@grid[1][0] == @grid[1][1] && @grid[1][1] == @grid[1][2] && @grid[1][2]) ||
-    (@grid[2][0] == @grid[2][1] && @grid[2][1] == @grid[2][2] && @grid[2][2])
+  def winner?
+    results = false
+
+    for i in 0..2
+      # check row
+      results ||= (@grid[i][0] == @grid[i][1] && @grid[i][1] == @grid[i][2] && @grid[i][2])
+      # check column
+      results ||= (@grid[0][i] == @grid[1][i] && @grid[1][i] == @grid[2][i] && @grid[2][i])
+    end
+
+    # check diagonals
+    results ||= (@grid[0][0] == @grid[1][1] && @grid[1][1] == @grid[2][2] && @grid[2][2])
+    results ||= (@grid[0][2] == @grid[1][1] && @grid[1][1] == @grid[2][0] && @grid[2][0])
   end
 
-  def col_winner?
-    (@grid[0][0] == @grid[1][0] && @grid[1][0] == @grid[2][0] && @grid[2][0]) ||
-    (@grid[0][1] == @grid[1][1] && @grid[1][1] == @grid[2][1] && @grid[2][1]) ||
-    (@grid[0][2] == @grid[1][2] && @grid[1][2] == @grid[2][2] && @grid[2][2])
-  end
-
-  def diag_winner?
-    (@grid[0][0] == @grid[1][1] && @grid[1][1] == @grid[2][2] && @grid[2][2]) ||
-    (@grid[2][0] == @grid[1][1] && @grid[1][1] == @grid[0][2] && @grid[0][2])
-  end
 end
 
 class Move
@@ -45,7 +40,7 @@ class Move
     @id = @@count
     @loc = location
     @game = game
-    @symbol = @id.even? ? "X" : "O"
+    @symbol = @id.even? ? "O" : "X"
   end
 
 end
