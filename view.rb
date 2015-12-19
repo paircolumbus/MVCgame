@@ -45,11 +45,7 @@ class Board
   end
 
   def pixelize(value, square_length)
-    (value - 0.5) * square_length - 1
+    (value + 0.5) * square_length - 1
   end
 
 end
-
-# b = Board.new
-# b.add_move_to_pixel_array("X", {x: 1, y: 1})
-# b.draw

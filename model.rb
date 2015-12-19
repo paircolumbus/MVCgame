@@ -1,19 +1,38 @@
 class Game
-  attr_accessor :moves
+  attr_accessor :move_list, :grid
   
 
   def initialize
-    @moves = []
+    @move_list = []
+    @grid = [[nil, nil, nil],[nil, nil, nil],[nil, nil, nil]]
   end
-
-
 
   def winner?
-
+    row_winner? || col_winner? || diag_winner?
   end
 
-  def add_to_register(move)
-    @game.moves << move
+  def register(move)
+    @move_list << move
+    x = move.loc[:x]
+    y = move.loc[:y]
+    @grid[x][y] = move.symbol
+  end
+
+  def row_winner?
+    (@grid[0][0] == @grid[0][1] && @grid[0][1] == @grid[0][2] && @grid[0][2]) ||
+    (@grid[1][0] == @grid[1][1] && @grid[1][1] == @grid[1][2] && @grid[1][2]) ||
+    (@grid[2][0] == @grid[2][1] && @grid[2][1] == @grid[2][2] && @grid[2][2])
+  end
+
+  def col_winner?
+    (@grid[0][0] == @grid[1][0] && @grid[1][0] == @grid[2][0] && @grid[2][0]) ||
+    (@grid[0][1] == @grid[1][1] && @grid[1][1] == @grid[2][1] && @grid[2][1]) ||
+    (@grid[0][2] == @grid[1][2] && @grid[1][2] == @grid[2][2] && @grid[2][2])
+  end
+
+  def diag_winner?
+    (@grid[0][0] == @grid[1][1] && @grid[1][1] == @grid[2][2] && @grid[2][2]) ||
+    (@grid[2][0] == @grid[1][1] && @grid[1][1] == @grid[0][2] && @grid[0][2])
   end
 end
 
@@ -30,10 +49,3 @@ class Move
   end
 
 end
-
-# g = Game.new
-# m1 = Move.new(2,2,g)
-# m2 = Move.new(1,1,g)
-
-# p g.moves
-
