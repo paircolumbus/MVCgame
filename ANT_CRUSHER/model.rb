@@ -18,11 +18,11 @@ class Ant
 
   def initialize
     @location = rand(90) + 5
-    @status = "alive"
+    @status = :alive
   end
 
   def alive?
-    @status == "alive"
+    @status == :alive
   end
 
   def hit?(distance)
@@ -39,11 +39,11 @@ class Ant
 
   def direction
     if @location < 2
-      1 - rand(2)
+      rand(0..1)
     elsif @location > 98
-      0 - rand(2)
+      rand(-1..0)
     else
-      1 - rand(3)
+      rand(-1..1)
     end
   end
 
