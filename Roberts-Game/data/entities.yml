@@ -1,0 +1,40 @@
+
+skeleton:
+  description: It's laughing at you. It sounds insane.
+  health: 6
+  drops: red_book
+  damage:
+    - 0
+    - 0
+    - 0
+    - 1
+    - 2
+
+wraith:
+  description: It looks frightening. It's ghostly image lingers in your mind after you look away.
+  health: 15
+  weakness: blue_book
+  drops: lens
+  damage:
+    - 1
+    - 2
+    - 3
+
+hell_hound:
+  description: It's a large black dog with a slobbering maw full of razor sharp teeth and glowing red eyes.
+  health: 50
+  weakness: towel_rod
+  drops: hounds_tooth
+  damage:
+    - 3
+    - 4
+    - 5
+      
+storm_demon:
+  description: It must be what is causing the storm prevening you from going home.
+  health: 100
+  weakness: hounds_tooth
+  damage:
+    - 5
+    - 6
+    - 7

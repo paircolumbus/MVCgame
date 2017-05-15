@@ -1,0 +1,72 @@
+title: |
+  ...................................................................................
+  .          _______  _        _                 _______           _______  _______ .
+  .|\     /|(  ____ \( \      ( \      |\     /|(  ___  )|\     /|(  ____ \(  ____ \.
+  .| )   ( || (    \/| (      | (      | )   ( || (   ) || )   ( || (    \/| (    \/.
+  .| (___) || (__    | |      | |      | (___) || |   | || |   | || (_____ | (__    .
+  .|  ___  ||  __)   | |      | |      |  ___  || |   | || |   | |(_____  )|  __)   .
+  .| (   ) || (      | |      | |      | (   ) || |   | || |   | |      ) || (      .
+  .| )   ( || (____/\| (____/\| (____/\| )   ( || (___) || (___) |/\____) || (____/\.
+  .|/     \|(_______/(_______/(_______/|/     \|(_______)(_______)\_______)(_______/.
+  ... ROBERT LUDE 2015 ..............................................................
+idk: I don't know what you mean. Please rephrase your command or type "help"
+help: |
+  Available commands:
+    help
+    exit
+    quit
+    look
+    look at [item]
+    go [north|south|east|west|up|down]
+    unlock [item] with [item]
+    take [item]
+    open [item]
+    eat [item]
+    equip [item]
+    attack [entity]
+    read [item]
+
+  When an [item] is required, you may specify any item from your inventory or your current location. Keep in mind that not every item is immediately visible and you may have to look around!
+bye: Better luck next time!
+hp_perfect: You are in perfect health.
+hp_okay: You feel okay.
+hp_not_so_good: You don't feel so good.
+hp_dying: You are dying.
+hp_dead: "\u2620 \u2620 \u2620 YOU ARE DEAD. \u2620 \u2620 \u2620"
+solution: |
+  1. Front gate:
+    "unlock rusty gate with rusty gate key"
+    "go north"
+  2. Stone walkway:
+    "take front door key"
+    "go north"
+  3. Front door:
+    "unlock front door with front door key"
+  4. Kitchen:
+    "equip knife"
+    Recommended:
+      "take apple"
+      "take orange"
+      "take turkey"
+      "take pizza"
+  5. Dining room:
+    "attack skeleton" (repeat until defeated; eat to replenish HP if necessary)
+    "take red book"
+  6. Library:
+    "take blue book"
+    "unlock oak bookshelf with red book"
+  7. Dungeon entrance:
+    "equip blue book"
+    "attack wraith"
+  8.
+win_message: |
+  You leave the dark room.
+  You leave the chapel.
+  You leave the dungeon.
+  You climb back into the library.
+  You exit the house through the foyer.
+  The storm has cleared.
+  You may now go home.
+  
+  YOU HAVE DEFEATED HELL HOUSE.
+  Thanks for playing!

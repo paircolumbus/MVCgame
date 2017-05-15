@@ -1,0 +1,254 @@
+
+front_gate:
+  short_description: a rusted gate
+  long_description: You are standing at the entrance to an abandoned estate.
+  environmental_effect: storm
+  paths:
+    north: stone_walkway
+  items:
+    north: rusty_gate
+    south: first_hint
+    ground: rusty_gate_key
+
+stone_walkway:
+  short_description: a stone walkway
+  long_description: You are standing on a stone walkway.
+  environmental_effect: storm
+  paths:
+    north: front_door
+    south: front_gate
+  items:
+    east: unkempt_bush
+
+front_door:
+  short_description: a large, sturdy door
+  long_description: You are standing at the front entrance to the mansion.
+  environmental_effect: storm
+  paths:
+    north: foyer
+    south: stone_walkway
+  items:
+    north: front_door
+
+foyer:
+  short_description: the foyer
+  long_description: You are standing in the foyer of the mansion.
+  environmental_effect: dark
+  paths:
+    south: front_door
+    north: main_hall
+    east: kitchen
+    west: library
+
+library:
+  short_description: the library
+  long_description: You are standing in a large room filled with books. The books fill the room with their ancient odor.
+  environmental_effect: dark
+  paths:
+    north: study
+    east: foyer
+    west: secret_staircase
+  items:
+    south: walnut_bookshelf
+    west: oak_bookshelf
+
+study:
+  short_description: the study
+  long_description: You are standing in the study.
+  environmental_effect: smart
+  paths:
+    south: library
+    east: main_hall
+
+main_hall:
+  short_description: the main hall
+  long_description: You are standing in the main hall. The carpets are exquisite!
+  environmental_effect: dark
+  paths:
+    west: study
+    east: dining_room
+    north: stairs_bottom 
+    south: foyer
+  items:
+    ground: second_hint
+
+stairs_bottom:
+  short_description: the bottom of the stairs
+  long_description: You are standing on a grand staircase made of marble. You can't imagine how much this cost.
+  environmental_effect: dark
+  paths:
+    south: main_hall
+    ceiling: stairs_top
+
+stairs_top:
+  short_description: the top of the stairs
+  long_description: You are standing at the top of a beautiful staircase.
+  environmental_effect: dark
+  paths:
+    ground: stairs_bottom
+    south: upper_hall
+
+upper_hall:
+  short_description: a dim hallway
+  long_description: You are standing in a dim hallway.
+  environmental_effect: dark
+  paths:
+    north: stairs_top
+    west: observatory
+    east: master_bedroom
+    south: bathroom
+  items:
+    south: bathroom_door
+    east: bedroom_door
+
+master_bedroom:
+  short_description: a spacious bedroom
+  long_description: You are standing in a luxurious bedroom. You're pretty sure it's bigger than your apartment.
+  environmental_effect: dark
+  paths:
+    west: upper_hall
+  items:
+    north: wardrobe
+
+bathroom:
+  short_description: a bathroom
+  long_description: You are standing in a bathroom. The tile work is quite impressive.
+  environmental_effect: dark
+  paths:
+    north: upper_hall
+  items:
+    east: towel_rod
+
+observatory:
+  short_description: an observatory
+  long_description: You are standing in an observatory. Star charts decorate the walls.
+  environmental_effect: dark
+  paths:
+    east: upper_hall
+    west: ether
+  items:
+    west: telescope
+
+ether:
+  short_description: the ether
+  long_description: You are floating in the ether. It's impossible to describe with language.
+  environmental_effect: etheral
+  paths:
+    east: observatory
+  items:
+    west: heavenly_hammer
+
+dining_room:
+  short_description: the dining room
+  long_description: You are standing in the dining room.
+  environmental_effect: dark
+  paths:
+    west: main_hall
+    south: kitchen
+  entities:
+    - skeleton
+
+kitchen:
+  short_description: the kitchen
+  long_description: You are standing in the kitchen. It's filled with dated appliances.
+  environmental_effect: dark
+  paths:
+    west: foyer
+    north: dining_room
+  items:
+    east: countertop
+
+secret_staircase:
+  short_description: a secret staircase
+  long_description: You are standing in a secret staircase connecting the main level with the underground.
+  environmental_effect: dark
+  paths:
+    east: library
+    ground: dungeon_entrance
+
+dungeon_entrance:
+  short_description: the dungeon entrance
+  long_description: You are standing in the entrance to the dungeon.
+  environmental_effect: cold
+  paths:
+    ceiling: secret_staircase
+    north: damp_room
+  entities:
+    - wraith
+  items:
+    west: bedroom_key
+
+damp_room:
+  short_description: a dungeon chamber
+  long_description: You are standing in a damp room.
+  environmental_effect: scary
+  items:
+    ground: third_hint
+  paths:
+    south: dungeon_entrance
+    north: slimy_room
+    east: smelly_room
+    west: slimy_room
+
+slimy_room:
+  short_description: a dungeon chamber
+  long_description: You are standing in a room covered in a thick, gooey slime.
+  environmental_effect: scary
+  paths:
+    south: damp_room
+    north: damp_room
+    east: moist_room
+    west: moist_room
+  items: 
+    ground: licorice
+
+smelly_room:
+  short_description: a dungeon chamber
+  long_description: You are standing in a room whose stench is almost unbearable.
+  environmental_effect: scary
+  paths:
+    east: moist_room
+    west: damp_room
+  items:
+    ground: bathroom_key
+    north: egg_sandwich
+
+moist_room:
+  short_description: a dungeon chamber
+  long_description: You are standing in a room with incredibly moist air.
+  environmental_effect: scary
+  paths:
+    north: smelly_room
+    south: lava_room
+    east: slimy_room
+    west: slimy_room
+
+lava_room:
+  short_description: a dungeon chamber
+  long_description: You are standing in a room with a narrow walkway above a pool of molten iron.
+  environmental_effect: scary
+  paths:
+    north: moist_room
+    east: chapel
+  entities:
+    - hell_hound
+
+chapel:
+  short_description: a chapel
+  long_description: You are standing in a large, underground chapel.
+  environmental_effect: very_scary
+  paths:
+    east: lava_room
+    north: final_room
+  items:
+    north: picture_window
+    east: fourth_hint
+
+final_room:
+  short_description: a dark room
+  long_description: You are standing in the chamber
+  environmental_effect: very_scary
+  paths:
+    south: chapel
+
+
