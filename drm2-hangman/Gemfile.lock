@@ -1,0 +1,12 @@
+GEM
+  specs:
+    random-word (1.3.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  random-word
+
+BUNDLED WITH
+   1.13.6
