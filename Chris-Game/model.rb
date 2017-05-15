@@ -1,0 +1,21 @@
+class DeafGrandmaModel
+	SENTENCES = ["If the Easter Bunny and the Tooth Fairy had babies would they take your teeth and leave chocolate for you?",
+								"A purple pig and a green donkey flew a kite in the middle of the night and ended up sunburnt.",
+								"Last Friday in three week’s time I saw a spotted striped blue worm shake hands with a legless lizard.", 
+								"Wednesday is hump day, but has anyone asked the camel if he’s happy about it?",
+								"If Purple People Eaters are real… where do they find purple people to eat?",
+								"A song can make or ruin a person’s day if they let it get to them.",
+								"Writing a list of random sentences is harder than I initially thought it would be.",
+ 								"Where do random thoughts come from?",
+ 								"Lets all be unique together until we realise we are all the same.",
+ 								"I will never be this young again. Ever. Oh damn… I just got older.",
+ 								"If I don’t like something, I’ll stay away from it.",
+ 								"I love eating toasted cheese and tuna sandwiches.",
+ 								"If you like tuna and tomato sauce- try combining the two. It’s really not as bad as it sounds.",
+ 								"When I was little I had a car door slammed shut on my hand. I still remember it quite vividly.",
+ 								"The clock within this blog and the clock on my laptop are hour different from each other.",
+ 								"I want to buy a onesie… but know it won’t suit me.",
+ 								"I currently have 4 windows open up… and I don’t know why.",
+ 								"I often see the time 11:11 or 12:34 on clocks.",
+ 								"This is the last random sentence I will be writing and I am going to stop mid-sent"].freeze
+end
