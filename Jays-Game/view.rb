@@ -12,7 +12,7 @@ module GameView
      def error_message
         puts "That's not a command key. Try again!"
      end
-       
+
      def title_screen
 title = <<TITLE
 
