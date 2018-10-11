@@ -1,19 +1,19 @@
 module GameView
 
- module Print
+  module Print
 
-   class << self
-     def run_spinner
-       print "Loading (please wait) "
-       5.times { print "."; sleep 1; }
-       print "\n"
-     end
+  class << self
+    def run_spinner
+      print "Loading (please wait) "
+        5.times { print "."; sleep 1; }
+        print "\n"
+      end
 
-     def error_message
+      def error_message
         puts "That's not a command key. Try again!"
-     end
-       
-     def title_screen
+      end
+
+      def title_screen
 title = <<TITLE
 
      ********** || **********
@@ -21,18 +21,18 @@ title = <<TITLE
      ********** || **********
 
 TITLE
-       puts title
-     end
+  puts title
+  end
 
       def menu
 menu = <<EOS
 
        ***** Welcome *****
-       - (V)iew your todos
-       - (A)dd a todo
-       - (C)omplete a todo
-       - (D)elete a todo
-       - (Q)uit program
+      - (V)iew your todos
+      - (A)dd a todo
+      - (C)omplete a todo
+      - (D)elete a todo
+      - (Q)uit program
        *****         *****
 
 EOS
