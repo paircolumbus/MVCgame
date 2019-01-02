@@ -1,11 +1,10 @@
 module GameView
-
+  # module inside module? no closing end?
   module Print
-
-  class << self
-    def run_spinner
-      print "Loading (please wait) "
-        5.times { print "."; sleep 1; }
+    class << self
+      def run_spinner
+        print "Loading (please wait) "
+        5.times { print "."; sleep 1 }
         print "\n"
       end
 
@@ -14,28 +13,28 @@ module GameView
       end
 
       def title_screen
-title = <<TITLE
+        title = <<-EOS
 
-     ********** || **********
-     *      TODO MAGIC      *
-     ********** || **********
+        ********** || **********
+        *      TODO MAGIC      *
+        ********** || **********
 
-TITLE
-  puts title
-  end
+        EOS
+        puts title
+      end
 
       def menu
-menu = <<EOS
+        menu = <<-EOS
 
-       ***** Welcome *****
-      - (V)iew your todos
-      - (A)dd a todo
-      - (C)omplete a todo
-      - (D)elete a todo
-      - (Q)uit program
-       *****         *****
+        ***** Welcome *****
+        - (V)iew your todos
+        - (A)dd a todo
+        - (C)omplete a todo
+        - (D)elete a todo
+        - (Q)uit program
+        *****         *****
 
-EOS
+        EOS
         puts menu
       end
 
@@ -44,16 +43,16 @@ EOS
       def print_list(todos)
         todos.each do |todo|
           if todo.completed?
-            puts "[X] #{todo.id} || #{todo.title} - #{todo.description}" 
+            puts "[X] #{todo.id} || #{todo.title} - #{todo.description}"
           else
-            puts "[_] #{todo.id} || #{todo.title} - #{todo.description}" 
+            puts "[_] #{todo.id} || #{todo.title} - #{todo.description}"
           end
         end
       end
 
       def serialize_todo
-        {}.tap do |obj| 
-          ["\nEnter the title:", "\nEnter the description:"].each do |t| 
+        {}.tap do |obj|
+          ["\nEnter the title:", "\nEnter the description:"].each do |t|
             if obj.empty?
               obj[:title] = fetch_user_input(t)
             else
@@ -73,7 +72,7 @@ EOS
         fetch_user_input(gimme_id)
       end
 
-      def fetch_user_input(question=nil)
+      def fetch_user_input(question = nil)
         puts question if question
         print "> "
         gets.chomp

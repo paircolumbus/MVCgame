@@ -10,9 +10,6 @@ class GameController
     Print::run_spinner
     Print::title_screen
 
-    #Make todoList methods like RESTful endpoints (new/edit/update/delete)
-    #Think Backbone Model & View
-
     loop do
       Print::menu
       case Print::fetch_user_input
