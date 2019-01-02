@@ -1,5 +1,4 @@
 module GameView
-  # module inside module? no closing end?
   module Print
     class << self
       def run_spinner
