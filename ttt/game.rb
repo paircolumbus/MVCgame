@@ -24,9 +24,11 @@ class Game
     spot = nil
     until spot
       spot = gets.chomp.to_i
+      # puts spot >= 0 && spot <= 8 ? "valid input" : "invalid input"
       if @board[spot] != "X" && @board[spot] != "O"
         @board[spot] = @hum
       else
+        # puts "unacceptable input"
         spot = nil
       end
     end
