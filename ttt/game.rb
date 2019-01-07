@@ -23,12 +23,15 @@ class Game
   def get_human_spot
     spot = nil
     until spot
-      spot = gets.chomp.to_i
-      # puts spot >= 0 && spot <= 8 ? "valid input" : "invalid input"
-      if @board[spot] != "X" && @board[spot] != "O"
-        @board[spot] = @hum
+      spot = gets.chomp
+      if spot.to_i.to_s == spot && spot.to_i >= 0 && spot.to_i <= 8
+        spot = spot.to_i
+        if @board[spot] != "X" && @board[spot] != "O"
+          @board[spot] = @hum
+          puts "you went #{spot}"
+        end
       else
-        # puts "unacceptable input"
+        puts "invalid entry"
         spot = nil
       end
     end
@@ -49,6 +52,7 @@ class Game
         end
       end
     end
+    puts "computer went #{spot}"
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})

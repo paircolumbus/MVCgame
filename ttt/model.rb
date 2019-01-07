@@ -10,10 +10,15 @@ class Game
   def get_human_move
     move = nil
     until move
-      move = gets.chomp.to_i
-      if @board[move] != "X" && @board[move] != "O"
-        @board[move] = @hum
+      move = gets.chomp
+      if move.to_i.to_s == move && move.to_i >= 0 && move.to_i <= 8
+        move = move.to_i
+        if @board[move] != "X" && @board[move] != "O"
+          @board[move] = "O"
+          puts "you went #{move}"
+        end
       else
+        puts "invalid move"
         move = nil
       end
     end
@@ -24,16 +29,17 @@ class Game
     until spot
       if @board[4] == "4"
         spot = 4
-        @board[spot] = @com
+        @board[spot] = @X
       else
-        spot = get_best_move(@board, @com)
+        spot = get_best_move(@board, @X)
         if @board[spot] != "X" && @board[spot] != "O"
-          @board[spot] = @com
+          @board[spot] = @X
         else
           spot = nil
         end
       end
     end
+    puts "computer went #{spot}"
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
@@ -45,14 +51,14 @@ class Game
       end
     end
     available_spaces.each do |as|
-      board[as.to_i] = @com
-      if game_is_over(board)
+      board[as.to_i] = @X
+      if check_game_over
         best_move = as.to_i
         board[as.to_i] = as
         return best_move
       else
-        board[as.to_i] = @hum
-        if game_is_over(board)
+        board[as.to_i] = "O"
+        if check_game_over
           best_move = as.to_i
           board[as.to_i] = as
           return best_move

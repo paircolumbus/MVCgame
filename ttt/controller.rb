@@ -9,6 +9,7 @@ class Controller
     Print::welcome
     render_board(game)
     Print::acceptable_moves
+    play(game)
   end
 
   def render_board(game)
@@ -17,17 +18,16 @@ class Controller
     )
   end
 
-  def play
+  def play(game)
+    until game.check_game_over
+      game.get_human_move
+      if !game.check_game_over
+        game.eval_board
+      end
+      puts " #{game.board[0]} | #{game.board[1]} | #{game.board[2]} \n===+===+===\n #{game.board[3]} | #{game.board[4]} | #{game.board[5]} \n===+===+===\n #{game.board[6]} | #{game.board[7]} | #{game.board[8]} \n"
+    end
+    puts "Game over"
   end
-
-=begin 
-  until game_over
-    get_human_move
-      game.check_game_over
-    get_computer_move
-      game.check_game_over
-  end
-=end
 end
 
 Controller.new.start_game
