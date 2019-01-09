@@ -7,26 +7,45 @@ class Controller
   def start_game
     game = Game.new
     Print::welcome
-    render_board(game)
+    Print::render_board(game)
     Print::acceptable_moves
     play(game)
   end
 
-  def render_board(game)
-    Print::tell_user(
-      " #{game.board[0]} | #{game.board[1]} | #{game.board[2]} \n===+===+===\n #{game.board[3]} | #{game.board[4]} | #{game.board[5]} \n===+===+===\n #{game.board[6]} | #{game.board[7]} | #{game.board[8]} \n"
-    )
-  end
-
   def play(game)
     until game.check_game_over
-      game.get_human_move
+      get_human_spot(game)
+      # place_spot(current_turn, position_placement)
+      game.move(game.current_turn, game.position_placement)
+      game.switch_turns
       if !game.check_game_over
-        game.eval_board
+        # game.eval_board
       end
-      puts " #{game.board[0]} | #{game.board[1]} | #{game.board[2]} \n===+===+===\n #{game.board[3]} | #{game.board[4]} | #{game.board[5]} \n===+===+===\n #{game.board[6]} | #{game.board[7]} | #{game.board[8]} \n"
+      Print::render_board(game)
     end
-    puts "Game over"
+  end
+
+  def get_human_spot(game)
+    spot = nil
+    until spot
+      spot = gets.chomp
+      if spot.to_i.to_s == spot && spot.to_i >= 0 && spot.to_i <= 8
+        spot = spot.to_i
+        # change this block by referring to position & current turn in model, spot this block to another method to be called in play
+        if game.board[spot] != "X" && game.board[spot] != "O"
+          game.board[spot] = "O"
+        end
+      else
+        Print::acceptable_moves
+        spot = nil
+      end
+    end
+  end
+
+  def place_move
+  end
+
+  def get_computer_move(game)
   end
 end
 

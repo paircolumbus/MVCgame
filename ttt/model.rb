@@ -1,27 +1,25 @@
 class Game
-  attr_reader :board
+  attr_reader :board, :X, :O
+  attr_accessor :current_turn, :position_placement
 
   def initialize
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
-    @X = "X"
-    @O = "O"
+    @X = "X" #computer/second
+    @O = "O" #human/first
+    @current_turn = @O
+    @position_placement
   end
 
-  def get_human_move
-    move = nil
-    until move
-      move = gets.chomp
-      if move.to_i.to_s == move && move.to_i >= 0 && move.to_i <= 8
-        move = move.to_i
-        if @board[move] != "X" && @board[move] != "O"
-          @board[move] = "O"
-          puts "you went #{move}"
-        end
-      else
-        puts "invalid move"
-        move = nil
-      end
-    end
+  def switch_turns
+    @current_turn = @current_turn == @X ? @O : @X
+  end
+
+  def position_placement
+    @position_placement = 4
+  end
+
+  def move(current_turn, position_placement)
+    puts "#{current_turn} moves to #{position_placement}"
   end
 
   def eval_board
@@ -39,7 +37,6 @@ class Game
         end
       end
     end
-    puts "computer went #{spot}"
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
