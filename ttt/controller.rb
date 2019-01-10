@@ -8,44 +8,41 @@ class Controller
     game = Game.new
     Print::welcome
     Print::render_board(game)
-    Print::acceptable_moves
     play(game)
   end
 
   def play(game)
-    until game.check_game_over
-      get_human_spot(game)
-      # place_spot(current_turn, position_placement)
-      game.move(game.current_turn, game.position_placement)
+    until game.game_is_over
+      handle_human_move(game)
+      Print::report_move(game.current_turn, game.spot)
       game.switch_turns
-      if !game.check_game_over
-        # game.eval_board
-      end
+      handle_computer_move(game) if !game.game_is_over
+      game.switch_turns
       Print::render_board(game)
     end
+    handle_game_over(game)
   end
 
-  def get_human_spot(game)
-    spot = nil
-    until spot
-      spot = gets.chomp
-      if spot.to_i.to_s == spot && spot.to_i >= 0 && spot.to_i <= 8
-        spot = spot.to_i
-        # change this block by referring to position & current turn in model, spot this block to another method to be called in play
-        if game.board[spot] != "X" && game.board[spot] != "O"
-          game.board[spot] = "O"
-        end
-      else
-        Print::acceptable_moves
-        spot = nil
-      end
-    end
+  def handle_human_move(game)
+    Print::acceptable_moves
+    spot = gets.chomp
+    valid_move(spot, game) ? game.move(spot.to_i) : handle_human_move(game)
   end
 
-  def place_move
+  def valid_move(spot, game)
+    spot.to_i.to_s == spot &&
+    spot.to_i >= 0 && spot.to_i <= 8 &&
+    game.board[spot.to_i] != game.X &&
+    game.board[spot.to_i] != game.O ?
+      true : false
   end
 
-  def get_computer_move(game)
+  def handle_computer_move(game)
+    game.eval_board
+  end
+
+  def handle_game_over(game)
+    game.winner(game.board) ? Print::report_winner(game.current_turn) : Print::report_tie
   end
 end
 

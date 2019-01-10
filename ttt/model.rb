@@ -1,61 +1,52 @@
 class Game
   attr_reader :board, :X, :O
-  attr_accessor :current_turn, :position_placement
+  attr_accessor :symbol, :current_turn, :spot
 
   def initialize
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
-    @X = "X" #computer/second
-    @O = "O" #human/first
+    @X = "X"
+    @O = "O"
+    @center = "4"
+    @symbol
     @current_turn = @O
-    @position_placement
+    @spot
   end
 
   def switch_turns
     @current_turn = @current_turn == @X ? @O : @X
   end
 
-  def position_placement
-    @position_placement = 4
-  end
-
-  def move(current_turn, position_placement)
-    puts "#{current_turn} moves to #{position_placement}"
+  def move(spot)
+    @spot = spot
+    @board[spot] = @current_turn
   end
 
   def eval_board
-    spot = nil
-    until spot
-      if @board[4] == "4"
-        spot = 4
-        @board[spot] = @X
-      else
-        spot = get_best_move(@board, @X)
-        if @board[spot] != "X" && @board[spot] != "O"
-          @board[spot] = @X
-        else
-          spot = nil
-        end
-      end
+    if @board[4] == @center
+      @board[4] = @current_turn
+    else
+      spot = get_best_move(@board)
+      @board[spot] = @current_turn
     end
   end
 
-  def get_best_move(board, next_player, depth = 0, best_score = {})
+  def get_best_move(board)
     available_spaces = []
     best_move = nil
     board.each do |s|
-      if s != "X" && s != "O"
+      if s != @X && s != @O
         available_spaces << s
       end
     end
     available_spaces.each do |as|
-      board[as.to_i] = @X
-      if check_game_over
+      board[as.to_i] = @current_turn
+      if game_is_over
         best_move = as.to_i
         board[as.to_i] = as
         return best_move
       else
-        board[as.to_i] = "O"
-        if check_game_over
+        board[as.to_i] = @O
+        if game_is_over
           best_move = as.to_i
           board[as.to_i] = as
           return best_move
@@ -72,7 +63,7 @@ class Game
     end
   end
 
-  def check_game_over
+  def game_is_over
     winner(@board) || tie(@board) ? true : false
   end
 
@@ -88,6 +79,6 @@ class Game
   end
 
   def tie(board)
-    board.all? { |s| s == "X" || s == "O" }
+    board.all? { |s| s == @X || s == @O }
   end
 end
