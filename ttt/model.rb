@@ -18,49 +18,29 @@ class Game
 
   def move(spot)
     @spot = spot
-    @board[spot] = @current_turn
+    @board[@spot.to_i] = @current_turn
   end
 
   def eval_board
+    # take center if empty
     if @board[4] == @center
       @board[4] = @current_turn
+      # if center isn't available, take random move
     else
-      spot = get_best_move(@board)
+      spot = get_random_move(@board)
       @board[spot] = @current_turn
     end
   end
 
-  def get_best_move(board)
+  def get_random_move(board)
     available_spaces = []
-    best_move = nil
+    random_move = nil
     board.each do |s|
       if s != @X && s != @O
         available_spaces << s
       end
     end
-    available_spaces.each do |as|
-      board[as.to_i] = @current_turn
-      if game_is_over
-        best_move = as.to_i
-        board[as.to_i] = as
-        return best_move
-      else
-        board[as.to_i] = @O
-        if game_is_over
-          best_move = as.to_i
-          board[as.to_i] = as
-          return best_move
-        else
-          board[as.to_i] = as
-        end
-      end
-    end
-    if best_move
-      return best_move
-    else
-      n = rand(0..available_spaces.count)
-      return available_spaces[n].to_i
-    end
+    return available_spaces.sample.to_i
   end
 
   def game_is_over

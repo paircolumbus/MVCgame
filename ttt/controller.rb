@@ -15,9 +15,9 @@ class Controller
     until game.game_is_over
       handle_human_move(game)
       Print::report_move(game.current_turn, game.spot)
-      game.switch_turns
+      game.switch_turns if !game.game_is_over
       handle_computer_move(game) if !game.game_is_over
-      game.switch_turns
+      game.switch_turns if !game.game_is_over
       Print::render_board(game)
     end
     handle_game_over(game)
@@ -26,7 +26,7 @@ class Controller
   def handle_human_move(game)
     Print::acceptable_moves
     spot = gets.chomp
-    valid_move(spot, game) ? game.move(spot.to_i) : handle_human_move(game)
+    valid_move(spot, game) ? game.move(spot) : handle_human_move(game)
   end
 
   def valid_move(spot, game)
