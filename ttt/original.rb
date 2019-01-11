@@ -52,7 +52,8 @@ class Game
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
-    available_spaces = [] || get_available_spaces(board)
+    available_spaces = []
+    get_available_spaces(available_spaces)
     best_move = nil
     available_spaces.each do |as|
       board[as.to_i] = @com
@@ -75,13 +76,13 @@ class Game
   end
 
   #receives board array, returns array of available spaces
-  def get_available_spaces(board)
-    available_spaces = []
-    board.each do |space|
+  def get_available_spaces(available_spaces)
+    @board.each do |space|
       if space != "X" && space != "O"
         available_spaces << space
       end
     end
+    puts "available_spaces: #{available_spaces}"
     return available_spaces
   end
 
