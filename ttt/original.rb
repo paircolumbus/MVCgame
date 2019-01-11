@@ -52,13 +52,8 @@ class Game
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
-    available_spaces = []
+    available_spaces = [] || get_available_spaces(board)
     best_move = nil
-    board.each do |s|
-      if s != "X" && s != "O"
-        available_spaces << s
-      end
-    end
     available_spaces.each do |as|
       board[as.to_i] = @com
       if game_is_over(board)
@@ -76,12 +71,30 @@ class Game
         end
       end
     end
-    if best_move
-      return best_move
-    else
-      n = rand(0..available_spaces.count)
-      return available_spaces[n].to_i
+    best_move ? best_move : get_random_move(board)
+  end
+
+  #receives board array, returns array of available spaces
+  def get_available_spaces(board)
+    available_spaces = []
+    board.each do |space|
+      if space != "X" && space != "O"
+        available_spaces << space
+      end
     end
+    return available_spaces
+  end
+
+  #receives board array and best_move variable, returns boolean
+  def winning_move(board, best_move)
+  end
+
+  #receives board array and best_move variable, returns boolean
+  def block_winning_move(board, best)
+  end
+
+  def get_random_move(available_spaces)
+    return available_spaces.sample.to_i
   end
 
   def game_is_over(b)
@@ -96,7 +109,7 @@ class Game
   end
 
   def tie(b)
-    b.all? { |s| s == "X" || s == "O" }
+    b.all? { |space| space == "X" || space == "O" }
   end
 end
 
