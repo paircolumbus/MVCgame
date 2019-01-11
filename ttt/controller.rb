@@ -13,6 +13,7 @@ class Controller
 
   def play(game)
     until game.game_is_over
+      # game.get_best_move(game)
       handle_human_move(game)
       Print::report_move(game.current_turn, game.spot)
       game.switch_turns if !game.game_is_over
@@ -30,10 +31,11 @@ class Controller
   end
 
   def valid_move(spot, game)
-    spot.to_i.to_s == spot &&
-    spot.to_i >= 0 && spot.to_i <= 8 &&
-    game.board[spot.to_i] != game.X &&
-    game.board[spot.to_i] != game.O ?
+    int = spot.to_i
+    int.to_s == spot &&
+    int >= 0 && int <= 8 &&
+    game.board[int] != game.X &&
+    game.board[int] != game.O ?
       true : false
   end
 

@@ -22,10 +22,8 @@ class Game
   end
 
   def eval_board
-    # take center if empty
     if @board[4] == @center
       @board[4] = @current_turn
-      # if center isn't available, take random move
     else
       spot = get_random_move(@board)
       @board[spot] = @current_turn
