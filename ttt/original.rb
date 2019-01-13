@@ -5,51 +5,36 @@ class Game
     @hum = "O" # the user's marker
   end
 
-  def start_game
-    # start by printing the board
+  def play_game
     puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
     puts "Enter [0-8]:"
-    # loop through until the game was won or tied
     until winner || tie
-      get_human_spot
+      get_human_move
       if !winner && !tie
-        eval_board
+        get_computer_move
       end
       puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
     end
     puts winner ? "game over: winner" : "game over: tie"
   end
 
-  def get_human_spot
-    spot = nil
-    until spot
-      spot = gets.chomp.to_i
-      if @board[spot] != "X" && @board[spot] != "O"
-        @board[spot] = @hum
-      else
-        spot = nil
-      end
+  def get_human_move
+    space = nil
+    until space
+      space = gets.chomp.to_i
+      space_available?(space) ? @board[space] = @hum : space = nil
     end
   end
 
-  def eval_board
-    spot = nil
-    until spot
-      if @board[4] == "4"
-        spot = 4
-        @board[spot] = @com
-      else
-        spot = get_best_move
-        if @board[spot] != "X" && @board[spot] != "O"
-          @board[spot] = @com
-        else
-          spot = nil
-        end
-      end
-    end
+  def get_computer_move
+    space_available?(4) ? @board[4] = @com : @board[get_best_move] = @com
   end
 
-  def get_best_move #(board, next_player, depth = 0, best_score = {})
+  def space_available?(space)
+    @board[space.to_i] != "X" && @board[space.to_i] != "O"
+  end
+
+  def get_best_move
     available_spaces = []
     get_available_spaces(available_spaces)
     best_move = nil
@@ -70,13 +55,13 @@ class Game
         end
       end
     end
-    best_move ? best_move : get_random_move(available_spaces) #(@board)
+    get_random_move(available_spaces)
   end
 
   #receives board array, returns array of available spaces
   def get_available_spaces(available_spaces)
     @board.each do |space|
-      if space != "X" && space != "O"
+      if space_available?(space)
         available_spaces << space
       end
     end
@@ -112,4 +97,4 @@ class Game
 end
 
 game = Game.new
-game.start_game
+game.play_game
