@@ -32,8 +32,8 @@ module View
         tell_user "Game over. Tied game."
       end
 
-      def report_move(current_turn, spot)
-        tell_user "#{current_turn}'s move: #{spot}"
+      def report_move(current_turn, space)
+        tell_user "#{current_turn}'s move: #{space}"
       end
     end
   end

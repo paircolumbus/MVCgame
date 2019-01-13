@@ -27,30 +27,33 @@ class Game
   end
 
   def get_computer_move
-    space_available?(4) ? @board[4] = @com : @board[get_best_move] = @com
+    space_available?(4) ? @board[4] = @com : @board[get_best_space] = @com
   end
 
   def space_available?(space)
     @board[space] != "X" && @board[space] != "O"
   end
 
-  def get_best_move
+  def get_best_space
     available_spaces = []
     get_available_spaces(available_spaces)
     best_move = nil
     available_spaces.each do |space|
       @board[space.to_i] = @com
+      # winning_move
       if winner
         best_move = space.to_i
         @board[space.to_i] = space
         return best_move
       else
         @board[space.to_i] = @hum
+        # block_winning_move
         if winner
           best_move = space.to_i
           @board[space.to_i] = space
           return best_move
         else
+          # reset board
           @board[space.to_i] = space
         end
       end
@@ -67,14 +70,6 @@ class Game
       end
     end
     return available_spaces
-  end
-
-  #receives board array and best_move variable, returns boolean
-  def winning_move
-  end
-
-  #receives board array and best_move variable, returns boolean
-  def block_winning_move
   end
 
   def get_random_move(available_spaces)
