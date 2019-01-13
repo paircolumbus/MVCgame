@@ -31,27 +31,27 @@ class Game
   end
 
   def space_available?(space)
-    @board[space.to_i] != "X" && @board[space.to_i] != "O"
+    @board[space] != "X" && @board[space] != "O"
   end
 
   def get_best_move
     available_spaces = []
     get_available_spaces(available_spaces)
     best_move = nil
-    available_spaces.each do |as|
-      @board[as.to_i] = @com
+    available_spaces.each do |space|
+      @board[space.to_i] = @com
       if winner
-        best_move = as.to_i
-        @board[as.to_i] = as
+        best_move = space.to_i
+        @board[space.to_i] = space
         return best_move
       else
-        @board[as.to_i] = @hum
+        @board[space.to_i] = @hum
         if winner
-          best_move = as.to_i
-          @board[as.to_i] = as
+          best_move = space.to_i
+          @board[space.to_i] = space
           return best_move
         else
-          @board[as.to_i] = as
+          @board[space.to_i] = space
         end
       end
     end
@@ -61,7 +61,8 @@ class Game
   #receives board array, returns array of available spaces
   def get_available_spaces(available_spaces)
     @board.each do |space|
-      if space_available?(space)
+      if space != "X" && space != "O"
+        # if space_available?(space.to_i).....ignoring for now, but need to integrate
         available_spaces << space
       end
     end
