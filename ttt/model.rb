@@ -1,14 +1,19 @@
 class Game
   attr_reader :board, :X, :O
-  attr_accessor :symbol, :current_turn, :space
+  attr_accessor :symbol, :current_turn, :space, :difficulty
 
   def initialize
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
     @X = "X" #computer
     @O = "O" #human
-    @space
     @symbol
     @current_turn = @O
+    @space
+    @difficulty
+  end
+
+  def set_difficulty(setting)
+    @difficulty = setting
   end
 
   def switch_turns
@@ -31,29 +36,29 @@ class Game
   def get_best_space
     available_spaces = []
     get_available_spaces(available_spaces)
-    # if difficulty == impossible
-    best_move = nil
-    available_spaces.each do |space|
-      @board[space.to_i] = @X
-      # winning_move
-      if winner
-        best_move = space.to_i
-        @board[space.to_i] = space
-        return best_move
-      else
-        @board[space.to_i] = @hum
-        # block_winning_move
+    if @difficulty == 1
+      best_move = nil
+      available_spaces.each do |space|
+        @board[space.to_i] = @X
+        # winning_move
         if winner
           best_move = space.to_i
           @board[space.to_i] = space
           return best_move
         else
-          # reset board
-          @board[space.to_i] = space
+          @board[space.to_i] = @hum
+          # block_winning_move
+          if winner
+            best_move = space.to_i
+            @board[space.to_i] = space
+            return best_move
+          else
+            # reset board
+            @board[space.to_i] = space
+          end
         end
       end
     end
-    #
     get_random_space(available_spaces)
   end
 

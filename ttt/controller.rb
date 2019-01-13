@@ -8,12 +8,31 @@ class Controller
     game = Game.new
     Print::welcome
     Print::render_board(game)
+    difficulty_setting(game)
     play(game)
+  end
+
+  def difficulty_setting(game)
+    Print::tell_user("Choose computer difficulty: [0] Random or [1] Impossible")
+    difficulty = gets.chomp
+    case difficulty
+    when "0"
+      Print::tell_user("Difficulty: Random")
+      game.set_difficulty(0)
+    when "1"
+      Print::tell_user("Difficulty: Impossible")
+      game.set_difficulty(1)
+    else
+      Print::tell_user("Invalid input, please enter 0 or 1")
+      difficulty(game)
+    end
   end
 
   def play(game)
     until game.game_is_over
       handle_human_move(game)
+      Print::report_move(game.current_turn, game.space)
+      Print::render_board(game)
       game.switch_turns if !game.game_is_over
       handle_computer_move(game) if !game.game_is_over
       game.switch_turns if !game.game_is_over
@@ -25,8 +44,6 @@ class Controller
     Print::acceptable_moves
     space = gets.chomp
     valid_move(space, game) ? game.move(space.to_i) : handle_human_move(game)
-    Print::report_move(game.current_turn, game.space)
-    Print::render_board(game)
   end
 
   def valid_move(space, game)
