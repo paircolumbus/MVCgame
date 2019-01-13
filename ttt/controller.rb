@@ -7,8 +7,9 @@ class Controller
   def start_game
     game = Game.new
     Print::welcome
-    Print::render_board(game)
+
     difficulty_setting(game)
+    Print::render_board(game)
     play(game)
   end
 
@@ -24,7 +25,7 @@ class Controller
       game.set_difficulty(1)
     else
       Print::tell_user("Invalid input, please enter 0 or 1")
-      difficulty(game)
+      difficulty_setting(game)
     end
   end
 
