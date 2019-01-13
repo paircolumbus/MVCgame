@@ -11,16 +11,6 @@ class Game
     @current_turn = @O
   end
 
-  def valid_move(space)
-    int = space.to_i
-    int.to_s == space &&
-    int >= 0 &&
-    int <= 8 &&
-    @board[int] != @X &&
-    @board[int] != @O ?
-      true : false
-  end
-
   def switch_turns
     @current_turn = @current_turn == @X ? @O : @X
   end
@@ -32,7 +22,6 @@ class Game
 
   def get_computer_move
     space_available?(4) ? @board[4] = @X : @board[get_best_space] = @X
-    # space_available?(4) ? move(4) : move(get_best_space)
   end
 
   def space_available?(space)
@@ -42,6 +31,7 @@ class Game
   def get_best_space
     available_spaces = []
     get_available_spaces(available_spaces)
+    # if difficulty == impossible
     best_move = nil
     available_spaces.each do |space|
       @board[space.to_i] = @X
@@ -63,7 +53,8 @@ class Game
         end
       end
     end
-    get_random_move(available_spaces)
+    #
+    get_random_space(available_spaces)
   end
 
   #receives board array, returns array of available spaces
@@ -76,7 +67,7 @@ class Game
     return available_spaces
   end
 
-  def get_random_move(available_spaces)
+  def get_random_space(available_spaces)
     return available_spaces.sample.to_i
   end
 

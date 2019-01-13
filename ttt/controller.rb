@@ -15,10 +15,8 @@ class Controller
     until game.game_is_over
       handle_human_move(game)
       game.switch_turns if !game.game_is_over
-      puts "switching turns after human"
       handle_computer_move(game) if !game.game_is_over
       game.switch_turns if !game.game_is_over
-      puts "switching turns after computer"
     end
     handle_game_over(game)
   end
@@ -26,9 +24,19 @@ class Controller
   def handle_human_move(game)
     Print::acceptable_moves
     space = gets.chomp
-    game.valid_move(space) ? game.move(space.to_i) : handle_human_move(game)
+    valid_move(space, game) ? game.move(space.to_i) : handle_human_move(game)
     Print::report_move(game.current_turn, game.space)
     Print::render_board(game)
+  end
+
+  def valid_move(space, game)
+    int = space.to_i
+    int.to_s == space &&
+    int >= 0 &&
+    int <= 8 &&
+    game.board[int] != game.X &&
+    game.board[int] != game.O ?
+      true : false
   end
 
   def handle_computer_move(game)
