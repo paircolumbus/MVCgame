@@ -1,6 +1,8 @@
 class Game
   attr_reader :board, :X, :O
-  attr_accessor :symbol, :current_turn, :space, :difficulty
+  attr_accessor :symbol, :current_turn, :space,
+                :mode, :HvC, :HvH, :CvC,
+                :difficulty, :easy, :hard, :impossible
 
   def initialize
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
@@ -9,10 +11,18 @@ class Game
     @symbol
     @current_turn = @O
     @space
+    @mode
+    @HvC = "Human vs Computer"
+    @HvH = "Human vs Human"
+    @CvC = "Computer vs Computer"
     @difficulty
     @easy = "Easy"
     @hard = "Hard"
     @impossible = "Impossible"
+  end
+
+  def set_mode(setting)
+    @mode = setting
   end
 
   def set_difficulty(setting)

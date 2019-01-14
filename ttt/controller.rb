@@ -8,24 +8,22 @@ class Controller
     game = Game.new
     Print::welcome
     mode_setting(game)
-    difficulty_setting(game)
+    difficulty_setting(game) if game.mode == game.HvC
+    Print::report_settings(game)
     Print::render_board(game)
     play(game)
   end
 
   def mode_setting(game)
-    Print::tell_user("Choose game mode:\n[0] Human vs Computer [1] Human vs Human, or [2] Computer vs Computer")
+    Print::tell_user("Choose game mode:\n[0] #{game.HvC} [1] #{game.HvH}, or [2] #{game.CvC}")
     mode = gets.chomp
     case mode
     when "0"
-      Print::tell_user("Mode: Human vs Computer")
-      # game.set_mode("HvC")
+      game.set_mode(game.HvC)
     when "1"
-      Print::tell_user("Mode: Human vs Human")
-      # game.set_mode("HvH")
+      game.set_mode(game.HvH)
     when "2"
-      Print::tell_user("Mode: Computer vs Computer")
-      # game.set_mode("CvC")
+      game.set_mode(game.CvC)
     else
       Print::tell_user("Invalid input, please enter 0, 1 or 2")
       mode_setting(game)
@@ -33,18 +31,16 @@ class Controller
   end
 
   def difficulty_setting(game)
-    Print::tell_user("Choose computer difficulty: [0] Easy or [1] Hard")
+    Print::tell_user("Choose computer difficulty:\n[0] #{game.easy} or [1] #{game.hard}")
     difficulty = gets.chomp
     case difficulty
     when "0"
-      Print::tell_user("Difficulty: Easy")
-      game.set_difficulty("Easy")
+      game.set_difficulty(game.easy)
     when "1"
-      Print::tell_user("Difficulty: Hard")
-      game.set_difficulty("Hard")
+      game.set_difficulty(game.hard)
       # when "2"
       #   Print::tell_user("Difficulty: Impossible")
-      #   game.set_difficulty("Impossible")
+      #   game.set_difficulty(game.impossible)
     else
       Print::tell_user("Invalid input, please enter 0 or 1") #or 2
       difficulty_setting(game)
@@ -53,12 +49,16 @@ class Controller
 
   def play(game)
     until game.game_is_over
-      handle_human_move(game)
-      Print::report_move(game.current_turn, game.space)
-      Print::render_board(game)
-      game.switch_turns if !game.game_is_over
-      handle_computer_move(game) if !game.game_is_over
-      game.switch_turns if !game.game_is_over
+      if game.mode != game.CvC
+        handle_human_move(game)
+        Print::report_move(game.current_turn, game.space)
+        Print::render_board(game)
+        game.switch_turns if !game.game_is_over
+      end
+      if game.mode != game.HvH
+        handle_computer_move(game) if !game.game_is_over
+        game.switch_turns if !game.game_is_over
+      end
     end
     handle_game_over(game)
   end
