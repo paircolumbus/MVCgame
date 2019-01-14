@@ -7,14 +7,14 @@ class Controller
   def start_game
     game = Game.new
     Print::welcome
-    mode_setting(game)
-    difficulty_setting(game) if game.mode == game.HvC
+    handle_mode_setting(game)
+    handle_difficulty_setting(game) if game.mode == game.HvC
     Print::report_settings(game)
     Print::render_board(game)
     play(game)
   end
 
-  def mode_setting(game)
+  def handle_mode_setting(game)
     Print::tell_user("Choose game mode:\n[0] #{game.HvC} [1] #{game.HvH}, or [2] #{game.CvC}")
     mode = gets.chomp
     case mode
@@ -26,11 +26,11 @@ class Controller
       game.set_mode(game.CvC)
     else
       Print::tell_user("Invalid input, please enter 0, 1 or 2")
-      mode_setting(game)
+      handle_mode_setting(game)
     end
   end
 
-  def difficulty_setting(game)
+  def handle_difficulty_setting(game)
     Print::tell_user("Choose computer difficulty:\n[0] #{game.easy} or [1] #{game.hard}")
     difficulty = gets.chomp
     case difficulty
@@ -43,7 +43,7 @@ class Controller
       #   game.set_difficulty(game.impossible)
     else
       Print::tell_user("Invalid input, please enter 0 or 1") #or 2
-      difficulty_setting(game)
+      handle_difficulty_setting(game)
     end
   end
 
