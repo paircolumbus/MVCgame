@@ -34,8 +34,7 @@ class Game
   end
 
   def get_best_space
-    available_spaces = []
-    get_available_spaces(available_spaces)
+    available_spaces = get_available_spaces
     if @difficulty == 1
       best_move = nil
       available_spaces.each do |space|
@@ -63,12 +62,13 @@ class Game
   end
 
   def winning_move?(space)
-    puts "checking winning move"
+    puts "checking winning #{@current_turn} move"
     move(space.to_i)
     winner
   end
 
   def block_win?(space)
+    puts "checking blocking move"
     switch_turns
     move(space.to_i)
     switch_turns
@@ -79,8 +79,10 @@ class Game
   end
 
   #receives board array, returns array of available spaces
-  def get_available_spaces(available_spaces)
+  def get_available_spaces
+    available_spaces = []
     @board.each do |space|
+      # available_spaces << space if space_available?(space.to_i)
       if space != "X" && space != "O"
         available_spaces << space
       end
