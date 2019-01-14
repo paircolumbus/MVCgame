@@ -8,7 +8,11 @@ class Controller
     game = Game.new
     Print::welcome
     handle_mode_setting(game)
-    handle_difficulty_setting(game) if game.mode == game.HvC
+    if game.mode != game.CvC
+      handle_order_setting(game)
+      handle_symbol_setting(game)
+      handle_difficulty_setting(game) if game.mode == game.HvC
+    end
     Print::report_settings(game)
     Print::render_board(game)
     play(game)
@@ -30,6 +34,34 @@ class Controller
     end
   end
 
+  def handle_order_setting(game)
+    Print::tell_user("Choose your order:\n[0] #{game.first} or [1] #{game.second}")
+    order = gets.chomp
+    case order
+    when "0"
+      game.set_order(game.first)
+    when "1"
+      game.set_order(game.second)
+    else
+      Print::tell_user("Invalid input, please enter 0 or 1")
+      handle_order_setting(game)
+    end
+  end
+
+  def handle_symbol_setting(game)
+    Print::tell_user("Choose your symbol:\n[0] #{game.X} or [1] #{game.O}")
+    symbol = gets.chomp
+    case symbol
+    when "0"
+      game.set_symbol(game.X)
+    when "1"
+      game.set_symbol(game.O)
+    else
+      Print::tell_user("Invalid input, please enter 0 or 1")
+      handle_symbol_setting(game)
+    end
+  end
+
   def handle_difficulty_setting(game)
     Print::tell_user("Choose computer difficulty:\n[0] #{game.easy} or [1] #{game.hard}")
     difficulty = gets.chomp
@@ -48,6 +80,11 @@ class Controller
   end
 
   def play(game)
+    game.set_first_turn if game.mode != game.CvC
+    if game.mode == game.HvC && game.order = game.second
+      handle_computer_move(game)
+      game.switch_turns
+    end
     until game.game_is_over
       if game.mode != game.CvC
         handle_human_move(game)

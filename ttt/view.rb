@@ -18,7 +18,11 @@ module View
       def report_settings(game)
         tell_user "*******************************"
         tell_user "Game Settings:\nMode: #{game.mode}\n"
-        tell_user "Difficulty: #{game.difficulty}" if game.mode == game.HvC
+        if game.mode != game.CvC
+          tell_user "Order: #{game.order}\n"
+          tell_user "Symbol: #{game.symbol}\n"
+          tell_user "Difficulty: #{game.difficulty}\n" if game.mode == game.HvC
+        end
         tell_user "*******************************"
       end
 
