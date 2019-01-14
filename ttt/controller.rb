@@ -14,17 +14,20 @@ class Controller
   end
 
   def difficulty_setting(game)
-    Print::tell_user("Choose computer difficulty: [0] Random or [1] Impossible")
+    Print::tell_user("Choose computer difficulty: [0] Easy or [1] Hard")
     difficulty = gets.chomp
     case difficulty
     when "0"
-      Print::tell_user("Difficulty: Random")
-      game.set_difficulty(0)
+      Print::tell_user("Difficulty: Easy")
+      game.set_difficulty("Easy")
     when "1"
-      Print::tell_user("Difficulty: Impossible")
-      game.set_difficulty(1)
+      Print::tell_user("Difficulty: Hard")
+      game.set_difficulty("Hard")
+      # when "2"
+      #   Print::tell_user("Difficulty: Impossible")
+      #   game.set_difficulty("Impossible")
     else
-      Print::tell_user("Invalid input, please enter 0 or 1")
+      Print::tell_user("Invalid input, please enter 0 or 1") #or 2
       difficulty_setting(game)
     end
   end

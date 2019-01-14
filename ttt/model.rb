@@ -35,7 +35,7 @@ class Game
 
   def get_best_space
     available_spaces = get_available_spaces
-    if @difficulty == 1
+    if @difficulty == "Hard" #|| @difficulty == "Impossible"
       best_move = nil
       available_spaces.each do |space|
         best_move = space.to_i
@@ -57,6 +57,7 @@ class Game
           @board[best_move] = space
         end
       end
+      # if @difficulty == "Impossible"
       # available_spaces.each do |space|
       #   best_move = space.to_i
       #   @board[best_move] = @current_turn
