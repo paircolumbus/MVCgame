@@ -7,10 +7,29 @@ class Controller
   def start_game
     game = Game.new
     Print::welcome
-
+    mode_setting(game)
     difficulty_setting(game)
     Print::render_board(game)
     play(game)
+  end
+
+  def mode_setting(game)
+    Print::tell_user("Choose game mode:\n[0] Human vs Computer [1] Human vs Human, or [2] Computer vs Computer")
+    mode = gets.chomp
+    case mode
+    when "0"
+      Print::tell_user("Mode: Human vs Computer")
+      # game.set_mode("HvC")
+    when "1"
+      Print::tell_user("Mode: Human vs Human")
+      # game.set_mode("HvH")
+    when "2"
+      Print::tell_user("Mode: Computer vs Computer")
+      # game.set_mode("CvC")
+    else
+      Print::tell_user("Invalid input, please enter 0, 1 or 2")
+      mode_setting(game)
+    end
   end
 
   def difficulty_setting(game)

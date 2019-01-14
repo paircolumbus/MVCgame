@@ -10,6 +10,9 @@ class Game
     @current_turn = @O
     @space
     @difficulty
+    @easy = "Easy"
+    @hard = "Hard"
+    @impossible = "Impossible"
   end
 
   def set_difficulty(setting)
@@ -30,12 +33,12 @@ class Game
   end
 
   def space_available?(space)
-    @board[space] != "X" && @board[space] != "O"
+    @board[space] != @X && @board[space] != @O
   end
 
   def get_best_space
     available_spaces = get_available_spaces
-    if @difficulty == "Hard" #|| @difficulty == "Impossible"
+    if @difficulty == @hard #|| @difficulty == @impossible
       best_move = nil
       available_spaces.each do |space|
         best_move = space.to_i
@@ -92,7 +95,7 @@ class Game
     available_spaces = []
     @board.each do |space|
       # available_spaces << space if space_available?(space.to_i)
-      if space != "X" && space != "O"
+      if space != @X && space != @O
         available_spaces << space
       end
     end
@@ -119,6 +122,6 @@ class Game
   end
 
   def tie
-    @board.all? { |space| space == "X" || space == "O" }
+    @board.all? { |space| space == @X || space == @O }
   end
 end
