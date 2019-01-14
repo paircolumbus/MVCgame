@@ -47,14 +47,10 @@ class Game
   end
 
   def set_first_turn
-    if (@symbol == @X && order == @first)
-      @current_turn = @X
-    elsif (@symbol == @X && order == @second)
-      @current_turn = @O
-    elsif (@symbol == @O && order == @first)
-      @current_turn = @O
-    elsif (@symbol == @O && order == @second)
-      @current_turn = @X
+    if @symbol == @X
+      @current_turn = @order == @first ? @X : @O
+    else
+      @current_turn = @order == @first ? @O : @X
     end
   end
 
@@ -65,6 +61,16 @@ class Game
   def move(space)
     @space = space
     @board[@space] = @current_turn
+  end
+
+  def valid_move(space)
+    int = space.to_i
+    int.to_s == space &&
+    int >= 0 &&
+    int <= 8 &&
+    @board[int] != @X &&
+    @board[int] != @O ?
+      true : false
   end
 
   def get_computer_move
@@ -129,7 +135,6 @@ class Game
   def block_fork?(space)
   end
 
-  #receives board array, returns array of available spaces
   def get_available_spaces
     available_spaces = []
     @board.each do |space|

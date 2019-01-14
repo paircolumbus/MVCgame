@@ -81,7 +81,7 @@ class Controller
 
   def play(game)
     game.set_first_turn if game.mode != game.CvC
-    if game.mode == game.HvC && game.order = game.second
+    if game.mode == game.HvC && game.order == game.second
       handle_computer_move(game)
       game.switch_turns
     end
@@ -103,17 +103,7 @@ class Controller
   def handle_human_move(game)
     Print::acceptable_moves
     space = gets.chomp
-    valid_move(space, game) ? game.move(space.to_i) : handle_human_move(game)
-  end
-
-  def valid_move(space, game)
-    int = space.to_i
-    int.to_s == space &&
-    int >= 0 &&
-    int <= 8 &&
-    game.board[int] != game.X &&
-    game.board[int] != game.O ?
-      true : false
+    game.valid_move(space) ? game.move(space.to_i) : handle_human_move(game)
   end
 
   def handle_computer_move(game)
